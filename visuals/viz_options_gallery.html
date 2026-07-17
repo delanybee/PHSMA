@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pipeline Aging — Visualization Options Gallery</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+         background: #f5f5f5; color: #1a1a1a; }
+  header { background: #1a1a1a; color: #fff; padding: 32px 48px 24px; }
+  header h1 { font-size: 1.7rem; font-weight: 700; margin-bottom: 6px; }
+  header p  { font-size: 0.95rem; color: #aaa; }
+  .section-label {
+    background: #e8e8e8; padding: 10px 48px;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: #555; border-top: 2px solid #ccc;
+  }
+  .card {
+    background: #fff; margin: 24px 48px; border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.10); overflow: hidden;
+  }
+  .card-header { padding: 20px 28px 12px; border-bottom: 1px solid #eee; }
+  .card-header h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+  .card-header .meta { font-size: 0.8rem; color: #888; }
+  .card-header .lib-tag {
+    display: inline-block; font-size: 0.7rem; font-weight: 700;
+    letter-spacing: .06em; padding: 2px 8px; border-radius: 3px;
+    margin-right: 8px; text-transform: uppercase;
+  }
+  .tag-plotly  { background: #3d4ef5; color: #fff; }
+  .tag-echarts { background: #e43; color: #fff; }
+  .tag-vanilla { background: #2a9; color: #fff; }
+  .card-body { padding: 20px 28px; }
+  .chart-wrap { width: 100%; }
+  .note { font-size: 0.82rem; color: #777; margin-top: 10px; line-height: 1.55; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+  footer { padding: 32px 48px; color: #999; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Pipeline Aging Data — Visualization Options</h1>
+  <p>Data: PHMSA Form 7000-1.1 · 2025 · 223,762 miles reported by installation decade · Hover all charts for details</p>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════ PLOTLY -->
+<div class="section-label">Plotly.js options</div>
+
+<!-- 1. Treemap -->
+<div class="card">
+  <div class="card-header">
+    <span class="lib-tag tag-plotly">Plotly</span>
+    <h2>Option 1 — Treemap</h2>
+    <div class="meta">Area = miles. Largest rectangles are immediately obvious. Colors map to age tier. Annotate with construction era.</div>
+  </div>
+  <div class="card-body">
+    <div id="treemap" class="chart-wrap" style="height:420px"></div>
+    <p class="note">
+      <b>Best for:</b> "At a glance, what fraction of the network is old?" The 1950s and 1960s boxes are massive — viscerally larger than the 2020s box.
+      No legend needed. Hover shows miles + context.
+    </p>
+  </div>
+</div>
+
+<!-- 2. Sunburst -->
+<div class="card">
+  <div class="card-header">
+    <span class="lib-tag tag-plotly">Plotly</span>
+    <h2>Option 2 — Sunburst (2-ring)</h2>
+    <div class="meta">Inner ring = regulatory era. Outer ring = installation decade. Tells both the big story and the detail simultaneously.</div>
+  </div>
+  <div class="card-body">
+    <div id="sunburst" class="chart-wrap" style="height:460px"></div>
+    <p class="note">
+      <b>Best for:</b> Showing the hierarchy — pre-EPA → 1950s / 1960s — in one elegant shape.
+      Click any inner segment to zoom in on that era. The "pre-EPA" wedge visually dominates.
+    </p>
+  </div>
+</div>
+
+<!-- 3. Waterfall -->
+<div class="card">
+  <div class="card-header">
+    <span class="lib-tag tag-plotly">Plotly</span>
+    <h2>Option 3 — Waterfall / Cumulative Build</h2>
+    <div class="meta">"The network was assembled in waves." Each bar = miles added per decade, cumulating to today's total.</div>
+  </div>
+  <div class="card-body">
+    <div id="waterfall" class="chart-wrap" style="height:420px"></div>
+    <p class="note">
+      <b>Best for:</b> Showing the construction timeline as a narrative — the post-war pipeline boom of the 1950s–60s, the lull in the 80s–00s, 
+      and the shale-era surge of the 2010s. Easy to read as a story of eras.
+    </p>
+  </div>
+</div>
+
+<!-- 4. Plotly horizontal lollipop -->
+<div class="card">
+  <div class="card-header">
+    <span class="lib-tag tag-plotly">Plotly</span>
+    <h2>Option 4 — Lollipop Chart (ranked)</h2>
+    <div class="meta">Cleaner than a bar chart. Sorted by miles. The 2010s shale-boom decade and 1950s post-war boom dominate instantly.</div>
+  </div>
+  <div class="card-body">
+    <div id="lollipop" class="chart-wrap" style="height:420px"></div>
+    <p class="note">
+      <b>Best for:</b> Direct comparison of decades ranked by size. The fact that the 2010s (#1) and 1950s (#2) are separated by 60 years
+      is a powerful story beat.
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ ECHARTS -->
+<div class="section-label">Apache ECharts options</div>
+
+<!-- 5. Nightingale Rose -->
+<div class="card">
+  <div class="card-header">
+    <span class="lib-tag tag-echarts">ECharts</span>
+    <h2>Option 5 — Nightingale Rose Chart</h2>
+    <div class="meta">Each petal = one decade. Radius = miles. Color gradient from deep red (oldest) to dark green (newest). Very editorial / magazine-style.</div>
+  </div>
+  <div class="card-body">
+    <div id="rose" class="chart-wrap" style="height:520px"></div>
+    <p class="note">
+      <b>Best for:</b> Investigative journalism hero visual. Visually striking — the 1950s and 1960s petals tower over the pre-1920 and 1920s ones.
+      The shale-era 2010s petal shows the modern boom. Immediately shareable.
+    </p>
+  </div>
+</div>
+
+<!-- 6. ECharts ThemeRiver / Streamgraph -->
+<div class="card">
+  <div class="card-header">
+    <span class="lib-tag tag-echarts">ECharts</span>
+    <h2>Option 6 — Theme River (Streamgraph) 2017–2025</h2>
+    <div class="meta">How has the composition of the network changed year over year? Each band = one installation decade. Width = miles active that year.</div>
+  </div>
+  <div class="card-body">
+    <div id="river" class="chart-wrap" style="height:440px"></div>
+    <p class="note">
+      <b>Best for:</b> "Is anything changing?" The 2010s band (green) grows — new shale-era pipe being added. But the old red/orange bands stay 
+      stubbornly wide, showing the oldest infrastructure is <i>not</i> being retired. The answer is mostly: no.
+    </p>
+  </div>
+</div>
+
+<!-- 7. Radial bar -->
+<div class="card">
+  <div class="card-header">
+    <span class="lib-tag tag-echarts">ECharts</span>
+    <h2>Option 7 — Radial Bar (Polar) Chart</h2>
+    <div class="meta">Concentric arcs, one per decade. Length = miles. A non-traditional alternative to a standard horizontal bar.</div>
+  </div>
+  <div class="card-body">
+    <div id="radialbar" class="chart-wrap" style="height:520px"></div>
+    <p class="note">
+      <b>Best for:</b> A visually interesting sidebar or supporting chart. The 2010s outer ring and 1950s ring competing for dominance 
+      reads as "old and new infrastructure neck and neck."
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ VANILLA -->
+<div class="section-label">Vanilla JavaScript / Canvas options</div>
+
+<!-- 8. Waffle chart -->
+<div class="card">
+  <div class="card-header">
+    <span class="lib-tag tag-vanilla">Canvas JS</span>
+    <h2>Option 8 — Waffle Chart (Unit Chart)</h2>
+    <div class="meta">Each square = 1,000 miles. 224 squares total. Color = installation decade. Count the red squares — that's old infrastructure.</div>
+  </div>
+  <div class="card-body">
+    <canvas id="waffle" width="1000" height="300" style="width:100%;max-width:1000px;display:block;margin:auto"></canvas>
+    <div id="waffle-legend" style="display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;font-size:0.78rem"></div>
+    <p class="note">
+      <b>Best for:</b> "Count the red squares" journalism. A general audience immediately understands that each square is a real, physical 
+      chunk of pipeline. No axis needed. The red pre-EPA squares overwhelming the canvas is the whole story.
+    </p>
+  </div>
+</div>
+
+<footer>All charts use 2025 PHMSA Form 7000-1.1 data · 223,762 miles (excluding unknown install date) · Built with Plotly.js 2.35 and Apache ECharts 5.5</footer>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────────────
+const decades = ["Pre-1920","1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"];
+const miles   = [121, 1843, 5388, 14889, 32154, 32482, 28802, 16927, 18368, 15950, 45564, 11274];
+const total   = miles.reduce((a,b)=>a+b,0);
+
+// Age tier grouping
+const era = {
+  "Pre-1920":"Pre-1970 (pre-EPA)", "1920s":"Pre-1970 (pre-EPA)",
+  "1930s":"Pre-1970 (pre-EPA)",    "1940s":"Pre-1970 (pre-EPA)",
+  "1950s":"Pre-1970 (pre-EPA)",    "1960s":"Pre-1970 (pre-EPA)",
+  "1970s":"1970–1989",             "1980s":"1970–1989",
+  "1990s":"1990–2009",             "2000s":"1990–2009",
+  "2010s":"Post-2010",             "2020s":"Post-2010",
+};
+// Color per decade (red=old → green=new)
+const decColor = {
+  "Pre-1920":"#7F1D1D","1920s":"#991B1B","1930s":"#B91C1C","1940s":"#DC2626",
+  "1950s":"#EA580C","1960s":"#F97316",
+  "1970s":"#FCD34D","1980s":"#A3E635",
+  "1990s":"#4ADE80","2000s":"#22C55E","2010s":"#16A34A","2020s":"#14532D"
+};
+const eraColor = {
+  "Pre-1970 (pre-EPA)":"#DC2626",
+  "1970–1989":"#FCD34D",
+  "1990–2009":"#4ADE80",
+  "Post-2010":"#166534"
+};
+
+// ── 1. TREEMAP ────────────────────────────────────────────────────────────────
+(function(){
+  const ids     = ["Network","Pre-1970 (pre-EPA)","1970–1989","1990–2009","Post-2010"].concat(decades);
+  const parents = ["",       "Network",            "Network",  "Network",  "Network"].concat(decades.map(d=>era[d]));
+  const vals    = [0,
+    [0,1,2,3,4,5].reduce((s,i)=>s+miles[i],0),
+    [6,7].reduce((s,i)=>s+miles[i],0),
+    [8,9].reduce((s,i)=>s+miles[i],0),
+    [10,11].reduce((s,i)=>s+miles[i],0),
+  ].concat(miles);
+  const colors  = ["#fff","#DC2626","#FCD34D","#4ADE80","#166534"].concat(decades.map(d=>decColor[d]));
+  const labels  = ["Network","Pre-1970<br>(pre-EPA)","1970–1989","1990–2009","Post-2010"].concat(
+    decades.map((d,i)=>`${d}<br>${(miles[i]/1000).toFixed(1)}k mi`)
+  );
+
+  Plotly.newPlot("treemap",[{
+    type:"treemap", ids, labels, parents, values:vals,
+    branchvalues:"total",
+    marker:{colors, line:{width:2, color:"#fff"}},
+    hovertemplate:"<b>%{label}</b><br>%{value:,.0f} miles  (%{percentRoot:.1%} of network)<extra></extra>",
+    textfont:{size:13},
+  }],{
+    title:{text:"<b>U.S. Hazardous Liquid Pipeline — Miles by Installation Decade (2025)</b>",
+           font:{size:14},x:.5,xanchor:"center"},
+    margin:{t:50,l:0,r:0,b:0},
+    paper_bgcolor:"white"
+  },{responsive:true});
+})();
+
+// ── 2. SUNBURST ───────────────────────────────────────────────────────────────
+(function(){
+  const eras = ["Pre-1970 (pre-EPA)","1970–1989","1990–2009","Post-2010"];
+  const eraMiles = {
+    "Pre-1970 (pre-EPA)": [0,1,2,3,4,5].reduce((s,i)=>s+miles[i],0),
+    "1970–1989":          [6,7].reduce((s,i)=>s+miles[i],0),
+    "1990–2009":          [8,9].reduce((s,i)=>s+miles[i],0),
+    "Post-2010":          [10,11].reduce((s,i)=>s+miles[i],0),
+  };
+  const ids     = ["root"].concat(eras).concat(decades);
+  const parents = [""].concat(eras.map(()=>"root")).concat(decades.map(d=>era[d]));
+  const values  = [0].concat(eras.map(e=>eraMiles[e])).concat(miles);
+  const colors  = ["#fff"].concat(eras.map(e=>eraColor[e])).concat(decades.map(d=>decColor[d]));
+  const labels  = ["All Pipelines"].concat(eras).concat(decades);
+
+  Plotly.newPlot("sunburst",[{
+    type:"sunburst", ids, labels, parents, values, branchvalues:"total",
+    marker:{colors, line:{width:1.5, color:"#fff"}},
+    hovertemplate:"<b>%{label}</b><br>%{value:,.0f} miles (%{percentRoot:.1%})<extra></extra>",
+    insidetextorientation:"radial",
+  }],{
+    title:{text:"<b>Installation Era → Decade Breakdown (2025)</b>  |  Inner ring = regulatory era  |  Outer ring = decade",
+           font:{size:13},x:.5,xanchor:"center"},
+    margin:{t:50,l:10,r:10,b:10},
+    paper_bgcolor:"white"
+  },{responsive:true});
+})();
+
+// ── 3. WATERFALL ──────────────────────────────────────────────────────────────
+(function(){
+  let cum = 0;
+  const bases   = decades.map((_,i)=>{ const b=cum; cum+=miles[i]; return b; });
+  const colors  = decades.map(d=>decColor[d]);
+  const pcts    = miles.map(m=>(m/total*100).toFixed(1));
+
+  Plotly.newPlot("waterfall",[
+    // Invisible base bars to stack on
+    {type:"bar", x:decades, y:bases, marker:{color:"rgba(0,0,0,0)"}, hoverinfo:"skip", showlegend:false},
+    // Actual bars
+    {type:"bar", x:decades, y:miles,
+     marker:{color:colors, line:{color:"#fff",width:1}},
+     text:miles.map((m,i)=>`${(m/1000).toFixed(0)}k`),
+     textposition:"outside",
+     hovertemplate:"<b>%{x}</b><br>%{y:,.0f} miles  (%{customdata}% of network)<extra></extra>",
+     customdata:pcts,
+     name:"Miles installed", showlegend:false}
+  ],{
+    barmode:"stack",
+    title:{text:"<b>Pipeline Miles Added per Decade — Cumulative View</b>",font:{size:14},x:.5,xanchor:"center"},
+    xaxis:{title:"Installation Decade",gridcolor:"#f0f0f0"},
+    yaxis:{title:"Cumulative Miles",tickformat:",",gridcolor:"#f0f0f0"},
+    plot_bgcolor:"white",paper_bgcolor:"white",
+    margin:{t:60,l:80,r:40,b:60},
+    shapes:[
+      {type:"line",x0:"1960s",x1:"1960s",y0:0,y1:230000,line:{color:"#B91C1C",width:1.5,dash:"dash"}},
+      {type:"line",x0:"1980s",x1:"1980s",y0:0,y1:230000,line:{color:"#F97316",width:1.5,dash:"dash"}},
+    ],
+    annotations:[
+      {x:"1960s",y:215000,text:"<b>← Pre-EPA era ends</b>",showarrow:false,font:{color:"#B91C1C",size:10},xshift:4,align:"left"},
+      {x:"1980s",y:195000,text:"<b>← Haz. Liquid Safety Act (1979)</b>",showarrow:false,font:{color:"#F97316",size:10},xshift:4,align:"left"},
+    ]
+  },{responsive:true});
+})();
+
+// ── 4. LOLLIPOP ───────────────────────────────────────────────────────────────
+(function(){
+  const sorted  = [...decades.map((d,i)=>({d,m:miles[i]}))].sort((a,b)=>b.m-a.m);
+  const yLabels = sorted.map(x=>x.d);
+  const xVals   = sorted.map(x=>x.m);
+  const colors  = sorted.map(x=>decColor[x.d]);
+  const pcts    = xVals.map(m=>(m/total*100).toFixed(1));
+
+  Plotly.newPlot("lollipop",[
+    // Stems
+    ...yLabels.map((y,i)=>({
+      type:"scatter", x:[0,xVals[i]], y:[y,y], mode:"lines",
+      line:{color:colors[i], width:2}, hoverinfo:"skip", showlegend:false,
+    })),
+    // Dots
+    {type:"scatter",
+     x:xVals, y:yLabels, mode:"markers+text",
+     marker:{color:colors, size:14, line:{color:"#fff",width:1.5}},
+     text:xVals.map((v,i)=>`${(v/1000).toFixed(1)}k  (${pcts[i]}%)`),
+     textposition:"middle right",
+     textfont:{size:11},
+     hovertemplate:"<b>%{y}</b><br>%{x:,.0f} miles<extra></extra>",
+     showlegend:false,
+    }
+  ],{
+    title:{text:"<b>Decades Ranked by Miles of Active Pipeline (2025)</b>",font:{size:14},x:.5,xanchor:"center"},
+    xaxis:{title:"Miles",tickformat:",",gridcolor:"#f0f0f0",range:[0,62000]},
+    yaxis:{autorange:"reversed",gridcolor:"#f0f0f0"},
+    plot_bgcolor:"white",paper_bgcolor:"white",
+    margin:{t:60,l:80,r:120,b:60},
+    shapes:[{type:"rect",x0:0,x1:62000,y0:-0.5,y1:5.5,
+             fillcolor:"rgba(220,38,38,.06)",line:{width:0}}],
+    annotations:[{x:31000,y:5.5,text:"pre-EPA era →",showarrow:false,
+                  font:{color:"#B91C1C",size:9},align:"center"}]
+  },{responsive:true});
+})();
+
+// ── 5. NIGHTINGALE ROSE (ECharts) ────────────────────────────────────────────
+(function(){
+  const chart = echarts.init(document.getElementById("rose"));
+  chart.setOption({
+    backgroundColor:"#fff",
+    tooltip:{trigger:"item",formatter:p=>`<b>${p.name}</b><br>${p.value.toLocaleString()} miles<br>${(p.value/total*100).toFixed(1)}% of network`},
+    legend:{show:false},
+    series:[{
+      type:"pie", radius:["15%","78%"],
+      center:["50%","53%"],
+      roseType:"area",
+      data: decades.map((d,i)=>({
+        name:d, value:miles[i],
+        itemStyle:{color:decColor[d]},
+        label:{
+          show:true,
+          formatter:"{b}\n{c0} mi",
+          fontSize:11, color:"#333",
+        }
+      })),
+      itemStyle:{borderColor:"#fff",borderWidth:2},
+      emphasis:{itemStyle:{shadowBlur:10,shadowOffsetX:0,shadowColor:"rgba(0,0,0,.3)"}}
+    }],
+    title:{text:"Pipeline Miles by Installation Decade  (Nightingale Rose)",
+           subtext:"Radius proportional to miles · Color: red = oldest, green = newest",
+           left:"center",top:10,
+           textStyle:{fontSize:14,fontWeight:"bold"},
+           subtextStyle:{fontSize:11,color:"#888"}}
+  });
+  window.addEventListener("resize",()=>chart.resize());
+})();
+
+// ── 6. THEME RIVER (ECharts) ─────────────────────────────────────────────────
+(function(){
+  // 2017-2025 x decade matrix — embedded directly
+  const riverRaw = [
+    {year:2017,Pre1920:125,d1920:2108,d1930:5775,d1940:15567,d1950:33068,d1960:31984,d1970:28952,d1980:16932,d1990:18227,d2000:15844,d2010:34540,d2020:0},
+    {year:2018,Pre1920:124,d1920:2000,d1930:5623,d1940:15310,d1950:32889,d1960:32176,d1970:28910,d1980:16879,d1990:18271,d2000:15885,d2010:37491,d2020:0},
+    {year:2019,Pre1920:124,d1920:1959,d1930:5575,d1940:15209,d1950:32745,d1960:32361,d1970:28868,d1980:16862,d1990:18320,d2000:15911,d2010:40832,d2020:0},
+    {year:2020,Pre1920:122,d1920:1913,d1930:5493,d1940:15054,d1950:32545,d1960:32470,d1970:28832,d1980:16845,d1990:18353,d2000:15943,d2010:43396,d2020:371},
+    {year:2021,Pre1920:122,d1920:1889,d1930:5445,d1940:14966,d1950:32452,d1960:32487,d1970:28835,d1980:16875,d1990:18375,d2000:15966,d2010:44568,d2020:3131},
+    {year:2022,Pre1920:121,d1920:1871,d1930:5419,d1940:14926,d1950:32326,d1960:32503,d1970:28818,d1980:16921,d1990:18368,d2000:15972,d2010:45163,d2020:6379},
+    {year:2023,Pre1920:121,d1920:1857,d1930:5406,d1940:14909,d1950:32261,d1960:32490,d1970:28809,d1980:16927,d1990:18369,d2000:15955,d2010:45449,d2020:8522},
+    {year:2024,Pre1920:121,d1920:1849,d1930:5393,d1940:14897,d1950:32198,d1960:32491,d1970:28804,d1980:16929,d1990:18368,d2000:15951,d2010:45527,d2020:10143},
+    {year:2025,Pre1920:121,d1920:1843,d1930:5388,d1940:14889,d1950:32154,d1960:32482,d1970:28802,d1980:16927,d1990:18368,d2000:15950,d2010:45564,d2020:11274},
+  ];
+  const keys = ["Pre1920","d1920","d1930","d1940","d1950","d1960","d1970","d1980","d1990","d2000","d2010","d2020"];
+  const dLabels = ["Pre-1920","1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"];
+  const dColors = ["#7F1D1D","#991B1B","#B91C1C","#DC2626","#EA580C","#F97316","#FCD34D","#A3E635","#4ADE80","#22C55E","#16A34A","#14532D"];
+
+  const seriesData = keys.map((k,ki)=>({
+    name: dLabels[ki],
+    type: "themeRiver",
+    data: riverRaw.map(r=>[String(r.year), r[k], dLabels[ki]]),
+    itemStyle:{color:dColors[ki]},
+  }));
+
+  const chart = echarts.init(document.getElementById("river"));
+  chart.setOption({
+    backgroundColor:"#fff",
+    tooltip:{trigger:"axis",axisPointer:{type:"line",lineStyle:{color:"rgba(0,0,0,.3)"}},
+      formatter: params => {
+        const yr = params[0]?.value[0];
+        let s = `<b>Year ${yr}</b><br>`;
+        params.sort((a,b)=>b.value[1]-a.value[1]).slice(0,6).forEach(p=>{
+          s += `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${p.color};margin-right:5px"></span>${p.seriesName}: ${p.value[1].toLocaleString()} mi<br>`;
+        });
+        return s;
+      }
+    },
+    legend:{data:dLabels,bottom:0,itemWidth:12,itemHeight:12,textStyle:{fontSize:10}},
+    singleAxis:{top:60,bottom:70,axisTick:{},axisLabel:{},type:"value",
+      min:2017,max:2025,axisLabel:{formatter:v=>String(Math.round(v))}},
+    title:{text:"Streamgraph: Network Composition 2017–2025 by Installation Decade",
+           subtext:"Band width = miles active. Hover to inspect. Is the oldest infrastructure shrinking?",
+           left:"center",top:8,
+           textStyle:{fontSize:13,fontWeight:"bold"},
+           subtextStyle:{fontSize:10,color:"#888"}},
+    series:seriesData,
+  });
+  window.addEventListener("resize",()=>chart.resize());
+})();
+
+// ── 7. RADIAL BAR (ECharts) ──────────────────────────────────────────────────
+(function(){
+  // Sort: largest at outside
+  const sorted = [...decades.map((d,i)=>({d,m:miles[i]}))].sort((a,b)=>a.m-b.m);
+
+  const chart = echarts.init(document.getElementById("radialbar"));
+  chart.setOption({
+    backgroundColor:"#fff",
+    polar:{radius:["10%","78%"]},
+    angleAxis:{max:50000,startAngle:90,splitLine:{show:false},axisLabel:{show:false}},
+    radiusAxis:{type:"category",data:sorted.map(x=>x.d),
+                axisLabel:{fontSize:11,color:"#555"},
+                axisLine:{show:false},axisTick:{show:false}},
+    tooltip:{formatter:p=>`<b>${p.name}</b><br>${p.value.toLocaleString()} miles  (${(p.value/total*100).toFixed(1)}%)`},
+    title:{text:"Radial Bar — Decades by Miles",subtext:"Each arc = one installation decade",
+           left:"center",top:10,textStyle:{fontSize:13,fontWeight:"bold"},
+           subtextStyle:{fontSize:10,color:"#888"}},
+    series:[{
+      type:"bar",
+      data:sorted.map(x=>({value:x.m, itemStyle:{color:decColor[x.d]}})),
+      coordinateSystem:"polar",
+      label:{show:true,position:"middle",formatter:p=>`${(p.value/1000).toFixed(0)}k`,fontSize:9,color:"#fff"},
+    }]
+  });
+  window.addEventListener("resize",()=>chart.resize());
+})();
+
+// ── 8. WAFFLE CHART (Canvas) ─────────────────────────────────────────────────
+(function(){
+  const UNIT  = 1000;    // 1 square = 1,000 miles
+  const COLS  = 32;
+  const GAP   = 3;
+  const S     = 24;      // cell size px
+  const canvas = document.getElementById("waffle");
+
+  // Expand data: one entry per 1k-mile unit
+  const units = [];
+  decades.forEach((d,i)=>{
+    const n = Math.round(miles[i]/UNIT);
+    for(let j=0;j<n;j++) units.push({decade:d, color:decColor[d]});
+  });
+
+  const ROWS = Math.ceil(units.length/COLS);
+  const W = COLS*(S+GAP)+GAP;
+  const H = ROWS*(S+GAP)+GAP;
+  canvas.width  = W;
+  canvas.height = H;
+  canvas.style.height = `${H}px`;
+
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0,0,W,H);
+
+  units.forEach((u,idx)=>{
+    const col = idx % COLS;
+    const row = Math.floor(idx/COLS);
+    const x = GAP + col*(S+GAP);
+    const y = GAP + row*(S+GAP);
+    ctx.fillStyle = u.color;
+    ctx.beginPath();
+    ctx.roundRect(x,y,S,S,3);
+    ctx.fill();
+  });
+
+  // Legend
+  const legDiv = document.getElementById("waffle-legend");
+  const shown = {};
+  units.forEach(u=>{
+    if(!shown[u.decade]){
+      shown[u.decade]=true;
+      const cnt = units.filter(x=>x.decade===u.decade).length;
+      const el = document.createElement("span");
+      el.innerHTML = `<span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:${u.color};vertical-align:middle;margin-right:4px"></span>${u.decade} (${cnt} sq = ~${(cnt).toFixed(0)}k mi)`;
+      legDiv.appendChild(el);
+    }
+  });
+})();
+</script>
+</body>
+</html>
