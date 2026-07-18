@@ -1,7 +1,135 @@
-<html>
-<head><meta charset="utf-8" /></head>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>U.S. Hazardous Liquid Pipeline Growth, 2004–2024</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #FAFAF8;
+  font-family: system-ui, -apple-system, sans-serif;
+  padding: 44px 36px 28px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.hed {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.25;
+  margin-bottom: 6px;
+  max-width: 680px;
+}
+.dek {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 28px;
+  letter-spacing: 0.01em;
+}
+#chart { width: 100%; }
+.source {
+  font-size: 0.72rem;
+  color: #999;
+  margin-top: 10px;
+  border-top: 1px solid #e8e4de;
+  padding-top: 8px;
+}
+</style>
+</head>
 <body>
-    <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.3.1.min.js" integrity="sha256-4rD3fugVb/nVJYUv5Ky3v+fYXoouHaBSP20WIJuEiWg=" crossorigin="anonymous"></script>                <div id="1e4baf30-faf1-4a5a-ae32-aecf4b6ce306" class="plotly-graph-div" style="height:680px; width:1200px;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("1e4baf30-faf1-4a5a-ae32-aecf4b6ce306")) {                    Plotly.newPlot(                        "1e4baf30-faf1-4a5a-ae32-aecf4b6ce306",                        [{"hovertemplate":"\u003cb\u003eCrude Oil\u003c\u002fb\u003e\u003cbr\u003e%{x}: %{y:,.0f} miles\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#D4380D","dash":"solid","width":2.5},"name":"Crude Oil","x":{"dtype":"i2","bdata":"1AfVB9YH1wfYB9kH2gfbB9wH3QfeB98H4AfhB+IH4wfkB+UH5gfnB+gH6Qc="},"y":{"dtype":"f8","bdata":"NV66SfAN6ECNl24Sc8vnQNFPjZeqqOdAKolBYAkq6EA0YOXQauLoQGZmZmYmwOlAx0s3idGs6kB1kxgEhmTrQFTjpZuYJuxARrbz\u002fZTr7UC28\u002f3U1GPwQM3MzMzq4fFAokW28yeL8kAbL90kHGbzQJZDi2x9y\u002fNAYhBYObaf9ED0\u002fdR42dL0QB+F61GYtfRAexSuRzmZ9EA5tMh2SIv0QGiR7XyLUPRAj8L1KEj680A="},"type":"scatter"},{"hovertemplate":"\u003cb\u003eRefined Products (gas\u002fdiesel\u002fjet)\u003c\u002fb\u003e\u003cbr\u003e%{x}: %{y:,.0f} miles\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#1677FF","dash":"solid","width":2.5},"name":"Refined Products (gas\u002fdiesel\u002fjet)","x":{"dtype":"i2","bdata":"1AfVB9YH1wfYB9kH2gfbB9wH3QfeB98H4AfhB+IH4wfkB+UH5gfnB+gH6Qc="},"y":{"dtype":"f8","bdata":"qvHSTe527kABLbKdZ7buQHFqvHQnOu5AtfUoXGNR7kARhetR3BPuQB+F61FkLe5AnMQgsL6c70Db+X5qSE\u002fvQHnpJjH4RO9AWDm0yJ7u7kBiEFg5sCjuQNNNYhAEle5AhetRuFZ\u002f7kAnMQisRHPuQC2yne\u002fLn+5AlkOLbFfQ7kBU46Wb4E3vQAIrhxatX+9Ac2iR7QhR70B56SYxIE3vQGq8dJPQXO9AJQaBlWPF70A="},"type":"scatter"},{"hovertemplate":"\u003cb\u003eHighly Volatile Liquids (propane\u002fbutane)\u003c\u002fb\u003e\u003cbr\u003e%{x}: %{y:,.0f} miles\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#389E0D","dash":"solid","width":2},"name":"Highly Volatile Liquids (propane\u002fbutane)","x":{"dtype":"i2","bdata":"1AfVB9YH1wfYB9kH2gfbB9wH3QfeB98H4AfhB+IH4wfkB+UH5gfnB+gH6Qc="},"y":{"dtype":"f8","bdata":"g8DKoTFK6UCaxks3cQrpQIcW2c6bpulAB65H4c6N6kBiEFg5BNjrQAeuR+Ea8utABFYOLe5D7EBg5dAiI53sQI2XbhLTOu1A8tJNYkim7kCkcD0KHRDwQKAaL93YhfBA+FPjpa\u002fH8ECF61G4zuLwQDm0yHZGKvFA5\u002fup8RDD8UCNl24SMUTyQCcxCKwQdfJAQmDl0OBt8kB\u002farx0+1jyQAIrhxbFe\u002fJABoGVQy1d8kA="},"type":"scatter"},{"hovertemplate":"\u003cb\u003eCO\u2082 & Other\u003c\u002fb\u003e\u003cbr\u003e%{x}: %{y:,.0f} miles\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#722ED1","dash":"dot","width":1.5},"name":"CO\u2082 & Other","x":{"dtype":"i2","bdata":"1AfVB9YH1wfYB9kH2gfbB9wH3QfeB98H4AfhB+IH4wfkB+UH5gfnB+gH6Qc="},"y":{"dtype":"f8","bdata":"zczMzMwpqUCI76fGiwuuQJTx0k3i5q1AnJ3vp4ZYrkDdJAaBtWqwQNRPjZdOYLBAyXa+n\u002frPsUBI4XoUTn+yQDVeuklM6LJA4XoUrgdGtEDD9Shcj5u0QKrx0k2CeLRATmIQWNlKtEDVeOkmsXS0QN9PjZeuVbRAO99PjRcbtEC4HoXrUR60QArXo3A927RASgwCK0fqtECHFtnON9O0QBsv3SSm4LRArBxaZPvItEA="},"type":"scatter"},{"hovertemplate":"\u003cb\u003eFuel Ethanol\u003c\u002fb\u003e\u003cbr\u003e%{x}: %{y:,.0f} miles\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#FA8C16","dash":"dot","width":1.5},"name":"Fuel Ethanol","x":{"dtype":"i2","bdata":"1AfVB9YH1wfYB9kH2gfbB9wH3QfeB98H4AfhB+IH4wfkB+UH5gfnB+gH6Qc="},"y":{"dtype":"f8","bdata":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApHA9CtcjMEB7FK5H4XovQOF6FK5H4S9ApHA9CtcjMECPwvUoXA8wQAAAAAAAAC5AAAAAAAAALkAAAAAAAAAuQAAAAAAAAC5ARrbz\u002fdS4MEBGtvP91LgwQKwcWmQ7nzBABoGVQ4tMMkDTTWIQWJk1QFg5tMh2njVAWDm0yHaeNUA="},"type":"scatter"},{"hovertemplate":"\u003cb\u003eTotal Network\u003c\u002fb\u003e\u003cbr\u003e%{x}: %{y:,.0f} miles\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#262626","width":3.5},"name":"Total Network","x":{"dtype":"i2","bdata":"1AfVB9YH1wfYB9kH2gfbB9wH3QfeB98H4AfhB+IH4wfkB+UH5gfnB+gH6Qc="},"y":{"dtype":"f8","bdata":"TDeJQWtYBEFtwvUoQVsEQd7\u002f\u002f\u002f\u002f2WQRBmEkMArG7BEF1bhKD6DYFQcPQItvregVBO99PjWAyBkFvEoPAtGgGQVpkO99awQZBZmZmZtCCB0GiRbbzgWkIQbgehetefQlBwcqhRRDsCUFg5dAiZGUKQfLSTWL6xQpBokW289eGC0EpXI\u002fCdQAMQW3n+6meFAxBiUFg5bP\u002fC0GBlUOLsOwLQWq8dJMO5QtB2\u002fl+agjEC0E="},"type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#389E0D","dash":"dash","width":1},"opacity":0.4,"type":"line","x0":2008,"x1":2008,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"#CF1322","dash":"dash","width":1},"opacity":0.4,"type":"line","x0":2010,"x1":2010,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"#CF1322","dash":"dash","width":1},"opacity":0.4,"type":"line","x0":2015,"x1":2015,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"#0958D9","dash":"dash","width":1},"opacity":0.4,"type":"line","x0":2017,"x1":2017,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"#389E0D","dash":"dash","width":1},"opacity":0.4,"type":"line","x0":2019,"x1":2019,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"#CF1322","dash":"dash","width":1},"opacity":0.4,"type":"line","x0":2021,"x1":2021,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"#389E0D","dash":"dash","width":1},"opacity":0.4,"type":"line","x0":2021,"x1":2021,"xref":"x","y0":0,"y1":1,"yref":"y domain"},{"line":{"color":"#722ED1","dash":"dash","width":1},"opacity":0.4,"type":"line","x0":2024,"x1":2024,"xref":"x","y0":0,"y1":1,"yref":"y domain"}],"annotations":[{"arrowcolor":"#389E0D","arrowhead":2,"arrowsize":1,"arrowwidth":1.5,"ax":0,"ay":45,"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"#389E0D","borderpad":3,"borderwidth":1,"font":{"color":"#389E0D","size":10},"hovertext":"Hydraulic fracturing unlocks vast Bakken and Permian Basin reserves. The US crude network will nearly double over the next decade.","showarrow":true,"text":"\u003cb\u003eShale boom begins\u003c\u002fb\u003e","x":2008,"y":182789.063999999},{"arrowcolor":"#CF1322","arrowhead":2,"arrowsize":1,"arrowwidth":1.5,"ax":0,"ay":-45,"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"#CF1322","borderpad":3,"borderwidth":1,"font":{"color":"#CF1322","size":10},"hovertext":"Enbridge Line 6B ruptures near Marshall, Michigan. ~20,000 barrels of diluted bitumen into the Kalamazoo River \u2014 largest inland spill in US Midwest history. Pipeline was 41 years old. River closed two years.","showarrow":true,"text":"\u003cb\u003eKalamazoo River spill \u2014 $1.2B cleanup\u003c\u002fb\u003e","x":2010,"y":172836.069},{"arrowcolor":"#CF1322","arrowhead":2,"arrowsize":1,"arrowwidth":1.5,"ax":0,"ay":-45,"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"#CF1322","borderpad":3,"borderwidth":1,"font":{"color":"#CF1322","size":10},"hovertext":"50-year-old Plains All American pipeline ruptures near Santa Barbara. Corrosion. 100,000+ gallons reach Pacific Ocean. Company initially failed to report it. $60M+ in penalties.","showarrow":true,"text":"\u003cb\u003eRefugio spill \u2014 $92M cleanup\u003c\u002fb\u003e","x":2015,"y":199811.865},{"arrowcolor":"#0958D9","arrowhead":2,"arrowsize":1,"arrowwidth":1.5,"ax":0,"ay":45,"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"#0958D9","borderpad":3,"borderwidth":1,"font":{"color":"#0958D9","size":10},"hovertext":"1,172-mile DAPL becomes operational after Standing Rock protests drew global attention. Crosses under Lake Oahe, the tribe's water source. 750,000 bbl\u002fday of Bakken crude.","showarrow":true,"text":"\u003cb\u003eDakota Access opens \u2014 $3.8B\u003c\u002fb\u003e","x":2017,"y":225236.517},{"arrowcolor":"#389E0D","arrowhead":2,"arrowsize":1,"arrowwidth":1.5,"ax":0,"ay":45,"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"#389E0D","borderpad":3,"borderwidth":1,"font":{"color":"#389E0D","size":10},"hovertext":"Crude oil pipeline mileage peaks at 84,475 miles \u2014 a 71% increase from 2004. Permian Basin boom accounts for nearly half of US crude production.","showarrow":true,"text":"\u003cb\u003eCrude network peaks\u003c\u002fb\u003e","x":2019,"y":234498.994},{"arrowcolor":"#CF1322","arrowhead":2,"arrowsize":1,"arrowwidth":1.5,"ax":0,"ay":-45,"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"#CF1322","borderpad":3,"borderwidth":1,"font":{"color":"#CF1322","size":10},"hovertext":"Cyberattack shuts down the Colonial Pipeline for 6 days. 45% of East Coast fuel supply. Gas shortages Georgia to New Jersey. DarkSide extorted $4.4M; FBI recovered $2.3M.","showarrow":true,"text":"\u003cb\u003eColonial ransomware \u2014 $4.4M ransom\u003c\u002fb\u003e","x":2021,"y":221035.833},{"arrowcolor":"#389E0D","arrowhead":2,"arrowsize":1,"arrowwidth":1.5,"ax":0,"ay":45,"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"#389E0D","borderpad":3,"borderwidth":1,"font":{"color":"#389E0D","size":10},"hovertext":"US hazardous liquid pipeline network reaches all-time high: 230,036 miles. That's 9.2\u00d7 Earth's circumference \u2014 enough to reach the Moon and back.","showarrow":true,"text":"\u003cb\u003eNetwork peaks: 230,036 mi\u003c\u002fb\u003e","x":2021,"y":239035.833},{"arrowcolor":"#722ED1","arrowhead":2,"arrowsize":1,"arrowwidth":1.5,"ax":0,"ay":-45,"bgcolor":"rgba(255,255,255,0.9)","bordercolor":"#722ED1","borderpad":3,"borderwidth":1,"font":{"color":"#722ED1","size":10},"hovertext":"Nearly a decade after Refugio spill, Sable Offshore wins approval to restart the same California coastal infrastructure. Fiercely contested. Pipe not replaced \u2014 only inspected.","showarrow":true,"text":"\u003cb\u003eSable pipeline restarts\u003c\u002fb\u003e","x":2024,"y":219513.822}],"title":{"font":{"size":16},"text":"\u003cb\u003eThe Invisible Network: U.S. Hazardous Liquid Pipeline Miles, 2004\u20132025\u003c\u002fb\u003e\u003cbr\u003e\u003csup\u003eSource: PHMSA Annual Report Mileage Summary (Form 7000-1.1) \u00b7 Hover annotations for details\u003c\u002fsup\u003e","x":0.5,"xanchor":"center"},"xaxis":{"title":{"text":"Year"},"tickmode":"linear","dtick":2,"gridcolor":"#f0f0f0"},"yaxis":{"title":{"text":"Pipeline Miles"},"tickformat":",","gridcolor":"#f0f0f0"},"legend":{"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"left","x":0},"margin":{"l":70,"r":50,"t":130,"b":70},"hovermode":"x unified","plot_bgcolor":"white","paper_bgcolor":"white","width":1200,"height":680},                        {"responsive": true}                    )                };            </script>        </div>
+<p class="hed">The Shale Boom Added 34,000 Miles of Crude Pipeline in a Single Decade</p>
+<p class="dek">U.S. hazardous liquid pipeline miles by commodity, 2004–2024 &nbsp;|&nbsp; Hover for detail</p>
+<div id="chart"></div>
+<p class="source">Source: PHMSA Annual Report Mileage Summary (Form 7000-1.1, PHMSA-F-7000-1.1). Data through December 2024. Excludes CO&#x2082; pipelines and ethanol (combined &lt;2.5% of total).</p>
+<script>
+const yr = [2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+const tot = [166669,166760,166719,169846,173789,175965,181836,183575,186411,192602,199984,208812,212354,216237,219327,225499,229391,230036,229366,228758,228514];
+const crd = [49264,48732,48453,49488,50963,52737,54631,56100,57653,61277,67133,73247,75954,79458,81080,84475,85294,84826,84372,84149,83209];
+const rpp = [62391,62899,61905,62091,61599,61803,64742,64122,64040,63349,61766,62632,62459,62362,62718,63107,64111,64253,64136,64105,64231];
+const hvl = [51794,51284,52533,54382,57024,57233,57887,58601,59863,62770,65794,67678,68731,69165,70308,72753,74819,75601,75486,75152,75708];
+
+const traces = [
+  {type:'scatter',x:yr,y:tot,name:'Total network',
+   line:{color:'#1a1a1a',width:3.8},mode:'lines',
+   hovertemplate:'<b>Total network</b><br>%{x}: %{y:,.0f} miles<extra></extra>'},
+  {type:'scatter',x:yr,y:crd,name:'Crude oil',
+   line:{color:'#9B1C1C',width:2.4},mode:'lines',
+   hovertemplate:'<b>Crude oil</b><br>%{x}: %{y:,.0f} miles<extra></extra>'},
+  {type:'scatter',x:yr,y:hvl,name:'Highly volatile liquids',
+   line:{color:'#166534',width:1.8,dash:'dot'},mode:'lines',
+   hovertemplate:'<b>HVL (propane/butane)</b><br>%{x}: %{y:,.0f} miles<extra></extra>'},
+  {type:'scatter',x:yr,y:rpp,name:'Refined products',
+   line:{color:'#1D4ED8',width:1.8,dash:'dot'},mode:'lines',
+   hovertemplate:'<b>Refined products (gas/diesel/jet)</b><br>%{x}: %{y:,.0f} miles<extra></extra>'},
+];
+
+const FONT = "Georgia, 'Times New Roman', serif";
+const annotStyle = (color) => ({
+  font:{size:11,color,family:FONT},
+  bgcolor:'rgba(250,250,248,0.94)',
+  borderpad:4,borderwidth:1,bordercolor:color,
+  showarrow:true,arrowhead:2,arrowsize:1,arrowwidth:1.4,arrowcolor:color
+});
+
+const layout = {
+  paper_bgcolor:'#FAFAF8',
+  plot_bgcolor:'#FFFFFF',
+  margin:{t:12,r:195,b:52,l:72},
+  xaxis:{
+    tickmode:'linear',dtick:2,range:[2003.5,2028],
+    gridcolor:'#ece8e2',tickcolor:'transparent',
+    tickfont:{family:'system-ui',size:11,color:'#777'},
+    zeroline:false
+  },
+  yaxis:{
+    tickformat:',d',ticksuffix:' mi',range:[35000,250000],
+    gridcolor:'#ece8e2',tickcolor:'transparent',
+    tickfont:{family:'system-ui',size:11,color:'#777'},
+    zeroline:false
+  },
+  hovermode:'x unified',
+  showlegend:false,
+  font:{family:FONT},
+  annotations:[
+    // --- end labels ---
+    {x:2024.8,y:228514,xref:'x',yref:'y',text:'<b>Total</b><br>228,514 mi',
+     showarrow:false,xanchor:'left',yanchor:'middle',
+     font:{size:12,color:'#1a1a1a',family:FONT}},
+    {x:2024.8,y:86700,xref:'x',yref:'y',text:'<b>Crude oil</b><br>83,209 mi',
+     showarrow:false,xanchor:'left',yanchor:'middle',
+     font:{size:12,color:'#9B1C1C',family:FONT}},
+    {x:2024.8,y:75708,xref:'x',yref:'y',text:'<b>HVL</b><br>75,708 mi',
+     showarrow:false,xanchor:'left',yanchor:'middle',
+     font:{size:12,color:'#166534',family:FONT}},
+    {x:2024.8,y:61500,xref:'x',yref:'y',text:'<b>Refined</b><br>64,231 mi',
+     showarrow:false,xanchor:'left',yanchor:'middle',
+     font:{size:12,color:'#1D4ED8',family:FONT}},
+    // --- event callouts ---
+    Object.assign({x:2008,y:173789,ax:0,ay:-52,
+     text:'<b>Shale boom begins</b>'},annotStyle('#555')),
+    Object.assign({x:2010,y:181836,ax:20,ay:58,
+     text:'<b>Kalamazoo River spill</b><br><span style="font-size:10px">Enbridge Line 6B &nbsp;&#x2022;&nbsp; $1.2B cleanup</span>'},annotStyle('#9B1C1C')),
+    Object.assign({x:2019,y:225499,ax:0,ay:-50,
+     text:'<b>Crude peaks: 84,475 mi</b><br><span style="font-size:10px">+71% since 2004</span>'},annotStyle('#9B1C1C')),
+    Object.assign({x:2021,y:230036,ax:36,ay:-38,
+     text:'<b>Network peak: 230,036 mi</b>'},annotStyle('#555')),
+  ],
+  shapes:[
+    {type:'line',x0:2008,x1:2008,y0:35000,y1:250000,
+     line:{color:'rgba(180,170,160,0.5)',width:1,dash:'dot'}},
+    {type:'line',x0:2010,x1:2010,y0:35000,y1:250000,
+     line:{color:'rgba(155,28,28,0.35)',width:1,dash:'dot'}},
+    {type:'line',x0:2019,x1:2019,y0:35000,y1:250000,
+     line:{color:'rgba(155,28,28,0.35)',width:1,dash:'dot'}},
+    {type:'line',x0:2021,x1:2021,y0:35000,y1:250000,
+     line:{color:'rgba(180,170,160,0.5)',width:1,dash:'dot'}},
+  ]
+};
+
+Plotly.newPlot('chart', traces, layout, {responsive:true, displayModeBar:false});
+</script>
 </body>
 </html>

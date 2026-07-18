@@ -1,7 +1,214 @@
-<html>
-<head><meta charset="utf-8" /></head>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pipeline Age Shift 2017–2024</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #FAFAF8;
+  font-family: system-ui, -apple-system, sans-serif;
+  padding: 44px 36px 28px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.hed {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.25;
+  margin-bottom: 6px;
+  max-width: 740px;
+}
+.dek {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 28px;
+  letter-spacing: 0.01em;
+}
+.callout-row {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.callout {
+  background: white;
+  border: 1px solid #e0dbd4;
+  border-radius: 4px;
+  padding: 16px 20px;
+  min-width: 180px;
+}
+.callout .num {
+  font-family: Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.callout .label {
+  font-size: 0.78rem;
+  color: #666;
+  line-height: 1.35;
+}
+.callout.red  .num { color: #9B1C1C; }
+.callout.gray .num { color: #555; }
+.callout.grn  .num { color: #166534; }
+#chart { width: 100%; }
+.source {
+  font-size: 0.72rem;
+  color: #999;
+  margin-top: 10px;
+  border-top: 1px solid #e8e4de;
+  padding-top: 8px;
+}
+</style>
+</head>
 <body>
-    <div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
-        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.3.1.min.js" integrity="sha256-4rD3fugVb/nVJYUv5Ky3v+fYXoouHaBSP20WIJuEiWg=" crossorigin="anonymous"></script>                <div id="ddf7bc88-d854-4b6d-9628-11b51f4d33c9" class="plotly-graph-div" style="height:440px; width:950px;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("ddf7bc88-d854-4b6d-9628-11b51f4d33c9")) {                    Plotly.newPlot(                        "ddf7bc88-d854-4b6d-9628-11b51f4d33c9",                        [{"hovertemplate":"%{x}: %{y:,.0f} miles\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#F97316"},"name":"Pre-1970 miles","opacity":0.75,"x":{"dtype":"i2","bdata":"4QfiB+MH5AflB+YH5wfoB+kH"},"y":{"dtype":"f8","bdata":"9P3UeM+b9kC6SQwCfw72QG4Sg8Csv\u002fVAwcqhRTp69UCcxCCw3sL1QCPb+X7YpPVA7FG4Ho+Q9UAYBFYOo3\u002f1QCQGgZUBNvVA"},"type":"bar","xaxis":"x","yaxis":"y"},{"hovertemplate":"%{x}: %{y:.1f}% of network\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#B91C1C","width":2.5},"mode":"lines+markers","name":"% of total network","x":{"dtype":"i2","bdata":"4QfiB+MH5AflB+YH5wfoB+kH"},"y":{"dtype":"f8","bdata":"4WH1M9YVRkDWoKTQfXRFQBUaoM0Oe0RAVY2WnmHWQ0D98RV77bhDQG0baIU2pUNAwOMrQSGdQ0BTIPsClpVDQOuj7lm3aUNA"},"type":"scatter","xaxis":"x","yaxis":"y2"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"anchor":"y","domain":[0.0,0.94],"title":{"text":"Year"},"tickmode":"linear","dtick":1,"gridcolor":"#f0f0f0"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Miles of Pre-1970 Pipe"},"tickformat":",","gridcolor":"#f0f0f0"},"yaxis2":{"anchor":"x","overlaying":"y","side":"right","title":{"text":"% of Total Network"},"ticksuffix":"%","showgrid":false},"title":{"font":{"size":13},"text":"\u003cb\u003ePre-1970 Pipeline Miles Still in Active Service, 2017\u20132025\u003c\u002fb\u003e\u003cbr\u003e\u003csup\u003eIs the oldest infrastructure being retired \u2014 or just growing as a share?\u003c\u002fsup\u003e","x":0.5,"xanchor":"center"},"margin":{"l":70,"r":90,"t":110,"b":70},"legend":{"orientation":"h","yanchor":"bottom","y":1.05,"xanchor":"left","x":0},"plot_bgcolor":"white","paper_bgcolor":"white","width":950,"height":440,"hovermode":"x unified"},                        {"responsive": true}                    )                };            </script>        </div>
+<p class="hed">New Construction Outpaces Retirement — But the Old Pipe Barely Moves</p>
+<p class="dek">Miles of active pipeline per installation decade, 2017 vs. 2024 &nbsp;|&nbsp; Open dot = 2017 &nbsp;&bull;&nbsp; Filled dot = 2024</p>
+
+<div class="callout-row">
+  <div class="callout red">
+    <div class="num">&minus;4,548</div>
+    <div class="label">Miles of pre-1970 pipeline<br>retired in 8 years</div>
+  </div>
+  <div class="callout grn">
+    <div class="num">+21,764</div>
+    <div class="label">Miles of post-2010 pipeline<br>added in 8 years</div>
+  </div>
+  <div class="callout gray">
+    <div class="num">~155 yrs</div>
+    <div class="label">To retire all pre-1970 pipe<br>at current pace</div>
+  </div>
+</div>
+
+<div id="chart"></div>
+<p class="source">Source: PHMSA Annual Report Form 7000-1.1, Part I (2017 and 2024). Rows with unknown installation date excluded (~6,500 miles in 2017, ~3,700 in 2024).</p>
+
+<script>
+const data = [
+  {dec:"Pre-1920", v17:207,  v24:118,  color:"#7F1D1D"},
+  {dec:"1920s",    v17:2451, v24:2129, color:"#9D1B1B"},
+  {dec:"1930s",    v17:5025, v24:5439, color:"#C41818"},
+  {dec:"1940s",    v17:15752,v24:15020,color:"#DC2626"},
+  {dec:"1950s",    v17:34946,v24:32338,color:"#EF4444"},
+  {dec:"1960s",    v17:34225,v24:33014,color:"#F97316"},
+  {dec:"1970s",    v17:29968,v24:29050,color:"#EAB308"},
+  {dec:"1980s",    v17:17411,v24:17220,color:"#84CC16"},
+  {dec:"1990s",    v17:18973,v24:18430,color:"#22C55E"},
+  {dec:"2000s",    v17:16846,v24:16445,color:"#16A34A"},
+  {dec:"2010s",    v17:33851,v24:45965,color:"#166534"},
+  {dec:"2020s",    v17:0,    v24:9650, color:"#14532D"},
+];
+
+// Reverse for top-to-bottom visual order (Pre-1920 on top)
+const rows = [...data].reverse();
+const yLabels = rows.map(d=>d.dec);
+const FONT = "Georgia, 'Times New Roman', serif";
+
+const traces = [];
+
+// Connecting stems
+rows.forEach(d => {
+  traces.push({
+    type:'scatter', mode:'lines',
+    x:[d.v17, d.v24], y:[d.dec, d.dec],
+    line:{color:d.color, width:2.2},
+    showlegend:false, hoverinfo:'skip',
+  });
+});
+
+// 2017 dots (open)
+traces.push({
+  type:'scatter', mode:'markers',
+  x: rows.map(d=>d.v17),
+  y: rows.map(d=>d.dec),
+  name:'2017',
+  marker:{
+    symbol:'circle-open',
+    color: rows.map(d=>d.color),
+    size:11, line:{width:2}
+  },
+  hovertemplate:'<b>%{y} — 2017</b><br>%{x:,.0f} miles<extra></extra>',
+});
+
+// 2024 dots (filled)
+traces.push({
+  type:'scatter', mode:'markers',
+  x: rows.map(d=>d.v24),
+  y: rows.map(d=>d.dec),
+  name:'2024',
+  marker:{
+    symbol:'circle',
+    color: rows.map(d=>d.color),
+    size:13, line:{color:'white',width:1.5}
+  },
+  hovertemplate:'<b>%{y} — 2024</b><br>%{x:,.0f} miles<extra></extra>',
+});
+
+// Change labels on the right
+const changeAnnot = rows.map(d => {
+  const diff = d.v24 - d.v17;
+  const sign = diff >= 0 ? '+' : '';
+  const col  = diff >= 0 ? '#166534' : '#9B1C1C';
+  const maxX = Math.max(d.v17, d.v24);
+  return {
+    x: maxX, y: d.dec,
+    xref:'x', yref:'y',
+    text:`${sign}${diff.toLocaleString()}`,
+    showarrow:false, xanchor:'left',
+    xshift: 12, yanchor:'middle',
+    font:{size:10.5, color:col, family:'system-ui'},
+  };
+});
+
+const layout = {
+  paper_bgcolor:'#FAFAF8',
+  plot_bgcolor:'#FFFFFF',
+  margin:{t:12, r:95, b:52, l:80},
+  height:430,
+  xaxis:{
+    tickformat:',d', ticksuffix:' mi',
+    range:[0, 53000],
+    gridcolor:'#ece8e2', tickcolor:'transparent',
+    tickfont:{family:'system-ui',size:10,color:'#888'},
+    zeroline:true, zerolinecolor:'#ddd', zerolinewidth:1,
+    title:{text:'Miles of active pipeline', font:{size:11,color:'#888',family:'system-ui'}, standoff:10}
+  },
+  yaxis:{
+    tickfont:{family:FONT, size:12, color:'#333'},
+    gridcolor:'#ece8e2', tickcolor:'transparent',
+    zeroline:false,
+  },
+  legend:{
+    orientation:'h', x:0.5, y:-0.16, xanchor:'center',
+    font:{size:12,family:FONT},
+    itemsizing:'constant',
+  },
+  annotations:[
+    ...changeAnnot,
+    // Zero-miles label for 2020s 2017 dot
+    {x:0, y:'2020s', xref:'x', yref:'y',
+     text:'0 mi in 2017',
+     showarrow:false, xanchor:'left', xshift:14, yanchor:'middle',
+     font:{size:9.5,color:'#888',family:'system-ui'}},
+  ],
+  shapes:[
+    // Subtle background band for pre-1970 rows
+    {type:'rect', xref:'paper', yref:'y',
+     x0:0, x1:1,
+     y0:'Pre-1920', y1:'1960s',
+     fillcolor:'rgba(155,28,28,0.04)',
+     line:{width:0}},
+  ],
+  font:{family:FONT},
+};
+
+Plotly.newPlot('chart', traces, layout, {responsive:true, displayModeBar:false});
+</script>
 </body>
 </html>
