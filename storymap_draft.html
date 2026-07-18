@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Invisible Network — PHMSA Pipeline Infrastructure</title>
+<!-- Libraries loaded once; Plotly for charts 1A / 3A / aging; ECharts for 3C -->
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+/* ── Reset & base ────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: #FAFAF8;
+  color: #1a1a1a;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.0625rem;   /* 17px */
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout containers ───────────────────────── */
+.col {                          /* prose column */
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.wide {                         /* chart + chart-header column */
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* ── Section spacing ─────────────────────────── */
+.s-title   { padding: 88px 0 64px; border-bottom: 1px solid #e0dbd4; }
+.s-prose   { padding: 64px 0 40px; }
+.s-chart   { padding: 40px 0 72px; background: #FFFFFF; border-top: 1px solid #ece8e2; border-bottom: 1px solid #ece8e2; }
+.s-footer  { padding: 64px 0 80px; border-top: 3px solid #1a1a1a; }
+
+/* ── Section 1: title block ──────────────────── */
+.kicker {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9B1C1C;
+  margin-bottom: 20px;
+}
+h1.title-hed {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.12;
+  color: #1a1a1a;
+  margin-bottom: 14px;
+}
+p.title-sub {
+  font-size: 1.15rem;
+  font-weight: 400;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 36px;
+  line-height: 1.45;
+}
+p.title-intro {
+  font-size: 1.05rem;
+  line-height: 1.78;
+  color: #2a2a2a;
+}
+
+/* ── Section headers ─────────────────────────── */
+h2.s-hed {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 22px;
+  line-height: 1.2;
+  padding-left: 16px;
+  border-left: 3px solid #9B1C1C;
+}
+p.body-copy {
+  color: #2a2a2a;
+  font-size: 1.0rem;
+  line-height: 1.78;
+}
+p.body-copy + p.body-copy { margin-top: 20px; }
+
+/* ── Chart block headers (inside .wide) ─────── */
+p.chart-hed {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.25;
+  margin-bottom: 6px;
+  max-width: 760px;
+}
+p.chart-dek {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 20px;
+  letter-spacing: 0.01em;
+}
+p.chart-src {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.7rem;
+  color: #999;
+  margin-top: 10px;
+  border-top: 1px solid #e8e4de;
+  padding-top: 8px;
+  max-width: 900px;
+}
+#chart-1a,
+#chart-3a  { width: 100%; }
+#chart-3c  { width: 100%; height: 600px; }
+#chart-aging { width: 100%; }
+
+/* ── Callout cards (aging section) ──────────── */
+.callout-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.callout {
+  background: #FAFAF8;
+  border: 1px solid #e0dbd4;
+  border-radius: 4px;
+  padding: 16px 20px;
+  min-width: 160px;
+}
+.callout .cnum {
+  font-family: Georgia, serif;
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.callout .clabel {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.77rem;
+  color: #666;
+  line-height: 1.35;
+}
+.callout.red  .cnum { color: #9B1C1C; }
+.callout.gray .cnum { color: #555; }
+.callout.grn  .cnum { color: #166534; }
+
+/* ── Section 6: footer block ─────────────────── */
+p.teaser-text {
+  font-size: 1.05rem;
+  line-height: 1.78;
+  color: #2a2a2a;
+  margin-bottom: 32px;
+}
+.part2-label {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9B1C1C;
+  margin-bottom: 10px;
+}
+h2.coming-next {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  color: #1a1a1a;
+}
+.methods-block {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid #e0dbd4;
+}
+.methods-block h3 {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 12px;
+}
+.methods-block p {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.8rem;
+  color: #777;
+  line-height: 1.6;
+  max-width: 660px;
+}
+.methods-block p + p { margin-top: 8px; }
+</style>
+</head>
+<body>
+
+
+<!-- ═══════════════════════════════════════════════ SECTION 1 · COLD OPEN -->
+<section class="s-title">
+  <div class="col">
+    <p class="kicker">PHMSA Data &nbsp;/&nbsp; U.S. Pipeline Infrastructure</p>
+    <h1 class="title-hed">The Invisible Network</h1>
+    <p class="title-sub">What 227,000 miles of buried oil pipeline says about American infrastructure</p>
+    <p class="title-intro">Beneath American farmland, suburbs, and rivers run more than 227,000 miles of pipeline carrying crude oil, gasoline, and other hazardous liquids. Laid end to end, the network would circle the Earth nine times. Nearly all of it is invisible to the public it runs beneath. What follows is an accounting of that network: when it was built, who operates it, and what its age means for the land and water above it.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════ SECTION 2 · GROWTH -->
+<section class="s-prose">
+  <div class="col">
+    <h2 class="s-hed">The Boom Nobody Watched</h2>
+    <p class="body-copy">Between 2004 and 2019, the shale revolution drove the largest oil infrastructure expansion in American history, adding 34,000 miles of crude pipeline in a single decade. The expansion drew little public attention. The controversies that did surface, Keystone XL and Dakota Access among them, concerned individual lines while the network itself grew by thousands of miles each year.</p>
+    <p class="body-copy">In July 2010, midway through the boom, a ruptured pipeline released more than 840,000 gallons of crude into Michigan&#8217;s Kalamazoo River, the largest inland oil spill in United States history. Cleanup costs exceeded one billion dollars. The pipe had been installed in 1969. That year matters to everything that follows.</p>
+  </div>
+</section>
+
+<div class="s-chart">
+  <div class="wide">
+    <p class="chart-hed">The Shale Boom Added 34,000 Miles of Crude Pipeline in a Single Decade</p>
+    <p class="chart-dek">U.S. hazardous liquid pipeline miles by commodity, 2004&#8211;2024 &nbsp;&#183;&nbsp; Hover for detail</p>
+    <div id="chart-1a"></div>
+    <p class="chart-src">Source: PHMSA Annual Report Mileage Summary (Form 7000-1.1). Data through December 2024. CO&#x2082; pipelines and ethanol excluded (combined &lt;2.5% of total).</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var yr  = [2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+  var tot = [166669,166760,166719,169846,173789,175965,181836,183575,186411,192602,199984,208812,212354,216237,219327,225499,229391,230036,229366,228758,228514];
+  var crd = [49264,48732,48453,49488,50963,52737,54631,56100,57653,61277,67133,73247,75954,79458,81080,84475,85294,84826,84372,84149,83209];
+  var rpp = [62391,62899,61905,62091,61599,61803,64742,64122,64040,63349,61766,62632,62459,62362,62718,63107,64111,64253,64136,64105,64231];
+  var hvl = [51794,51284,52533,54382,57024,57233,57887,58601,59863,62770,65794,67678,68731,69165,70308,72753,74819,75601,75486,75152,75708];
+
+  var F = "Georgia, 'Times New Roman', serif";
+  function aS(color) {
+    return {font:{size:11,color:color,family:F},bgcolor:'rgba(250,250,248,0.94)',
+            borderpad:4,borderwidth:1,bordercolor:color,
+            showarrow:true,arrowhead:2,arrowsize:1,arrowwidth:1.4,arrowcolor:color};
+  }
+
+  var traces = [
+    {type:'scatter',x:yr,y:tot,name:'Total',line:{color:'#1a1a1a',width:3.8},mode:'lines',
+     hovertemplate:'<b>Total network</b><br>%{x}: %{y:,.0f} miles<extra></extra>'},
+    {type:'scatter',x:yr,y:crd,name:'Crude oil',line:{color:'#9B1C1C',width:2.4},mode:'lines',
+     hovertemplate:'<b>Crude oil</b><br>%{x}: %{y:,.0f} miles<extra></extra>'},
+    {type:'scatter',x:yr,y:hvl,name:'HVL',line:{color:'#166534',width:1.8,dash:'dot'},mode:'lines',
+     hovertemplate:'<b>HVL (propane/butane)</b><br>%{x}: %{y:,.0f} miles<extra></extra>'},
+    {type:'scatter',x:yr,y:rpp,name:'Refined',line:{color:'#1D4ED8',width:1.8,dash:'dot'},mode:'lines',
+     hovertemplate:'<b>Refined products</b><br>%{x}: %{y:,.0f} miles<extra></extra>'},
+  ];
+
+  var layout = {
+    paper_bgcolor:'#FFFFFF', plot_bgcolor:'#FFFFFF',
+    margin:{t:12,r:195,b:52,l:72},
+    xaxis:{tickmode:'linear',dtick:2,range:[2003.5,2028],gridcolor:'#ece8e2',
+           tickcolor:'transparent',tickfont:{family:'system-ui',size:11,color:'#777'},zeroline:false},
+    yaxis:{tickformat:',d',ticksuffix:' mi',range:[35000,250000],gridcolor:'#ece8e2',
+           tickcolor:'transparent',tickfont:{family:'system-ui',size:11,color:'#777'},zeroline:false},
+    hovermode:'x unified', showlegend:false, font:{family:F},
+    annotations:[
+      {x:2024.8,y:228514,xref:'x',yref:'y',text:'<b>Total</b><br>228,514 mi',
+       showarrow:false,xanchor:'left',yanchor:'middle',font:{size:12,color:'#1a1a1a',family:F}},
+      {x:2024.8,y:86700,xref:'x',yref:'y',text:'<b>Crude oil</b><br>83,209 mi',
+       showarrow:false,xanchor:'left',yanchor:'middle',font:{size:12,color:'#9B1C1C',family:F}},
+      {x:2024.8,y:75708,xref:'x',yref:'y',text:'<b>HVL</b><br>75,708 mi',
+       showarrow:false,xanchor:'left',yanchor:'middle',font:{size:12,color:'#166534',family:F}},
+      {x:2024.8,y:61500,xref:'x',yref:'y',text:'<b>Refined</b><br>64,231 mi',
+       showarrow:false,xanchor:'left',yanchor:'middle',font:{size:12,color:'#1D4ED8',family:F}},
+      Object.assign({x:2008,y:173789,ax:0,ay:-52,text:'<b>Shale boom begins</b>'},aS('#555')),
+      Object.assign({x:2010,y:181836,ax:20,ay:58,
+        text:'<b>Kalamazoo River spill</b><br><span style="font-size:10px">Enbridge Line 6B &nbsp;&#x2022;&nbsp; $1.2B cleanup</span>'},aS('#9B1C1C')),
+      Object.assign({x:2019,y:225499,ax:0,ay:-50,
+        text:'<b>Crude peaks: 84,475 mi</b><br><span style="font-size:10px">+71% since 2004</span>'},aS('#9B1C1C')),
+      Object.assign({x:2021,y:230036,ax:36,ay:-38,text:'<b>Network peak: 230,036 mi</b>'},aS('#555')),
+    ],
+    shapes:[
+      {type:'line',x0:2008,x1:2008,y0:35000,y1:250000,line:{color:'rgba(180,170,160,0.5)',width:1,dash:'dot'}},
+      {type:'line',x0:2010,x1:2010,y0:35000,y1:250000,line:{color:'rgba(155,28,28,0.35)',width:1,dash:'dot'}},
+      {type:'line',x0:2019,x1:2019,y0:35000,y1:250000,line:{color:'rgba(155,28,28,0.35)',width:1,dash:'dot'}},
+      {type:'line',x0:2021,x1:2021,y0:35000,y1:250000,line:{color:'rgba(180,170,160,0.5)',width:1,dash:'dot'}},
+    ]
+  };
+  Plotly.newPlot('chart-1a', traces, layout, {responsive:true, displayModeBar:false});
+}());
+</script>
+
+
+<!-- ═══════════════════════════════════════════════ SECTION 3 · PRE-EPA -->
+<section class="s-prose">
+  <div class="col">
+    <h2 class="s-hed">Built Before the Rules Existed</h2>
+    <p class="body-copy">The Environmental Protection Agency was created in 1970. The Clean Water Act followed in 1972, and the first comprehensive federal safety law for hazardous liquid pipelines did not pass until 1979. By then, much of the network was already in service: 88,058 miles of today&#8217;s active pipeline, 39.2 percent of the whole, was installed before the EPA existed. That pipe was built to the engineering and regulatory standards of its era, and it remains in operation.</p>
+  </div>
+</section>
+
+<div class="s-chart">
+  <div class="wide">
+    <p class="chart-hed">39% of Active U.S. Hazardous Liquid Pipeline Was Built Before the EPA Existed</p>
+    <p class="chart-dek">Width of each band = miles of active pipeline installed in that decade &nbsp;&#183;&nbsp; 2024 data &nbsp;&#183;&nbsp; 224,818 miles with known installation date</p>
+    <div id="chart-3a"></div>
+    <p class="chart-src">Source: PHMSA Annual Report Form 7000-1.1, Part I (2024). 3,696 miles with unknown installation date excluded. EPA founded December 2, 1970.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var DECADES = ["Pre-1920","1920s","1930s","1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"];
+  var MILES   = [118,2129,5439,15020,32338,33014,29050,17220,18430,16445,45965,9650];
+  var COLORS  = ["#7F1D1D","#9D1B1B","#C41818","#DC2626","#EF4444","#F97316","#EAB308","#84CC16","#22C55E","#16A34A","#166534","#14532D"];
+  var TOTAL   = MILES.reduce(function(a,b){return a+b;},0);
+  var PRE_EPA_MI = MILES.slice(0,6).reduce(function(a,b){return a+b;},0);
+  var PRE_1980   = MILES.slice(0,8).reduce(function(a,b){return a+b;},0);
+  var F = "Georgia, 'Times New Roman', serif";
+
+  var cursor = 0;
+  var traces = DECADES.map(function(dec, i) {
+    var base = cursor;
+    cursor += MILES[i];
+    var pct = (MILES[i]/TOTAL*100).toFixed(1);
+    var showLabel = MILES[i] > 5000;
+    return {
+      type:'bar', orientation:'h',
+      x:[MILES[i]], y:['Pipeline'],
+      base: base,
+      marker:{color:COLORS[i], line:{color:'white',width:1.5}},
+      name: dec,
+      text: showLabel ? [dec + '  ' + (MILES[i]/1000).toFixed(0) + 'k mi'] : [''],
+      textposition:'inside',
+      textfont:{color:'white',size:11,family:F},
+      insidetextanchor:'middle',
+      hovertemplate:'<b>' + dec + '</b><br>' + MILES[i].toLocaleString() + ' miles (' + pct + '% of network)<br><extra></extra>',
+    };
+  });
+
+  var layout = {
+    paper_bgcolor:'#FFFFFF', plot_bgcolor:'#FFFFFF',
+    barmode:'stack',
+    margin:{t:80,r:24,b:80,l:24},
+    height:320,
+    xaxis:{range:[0, TOTAL * 1.01],tickformat:',d',ticksuffix:' mi',
+           gridcolor:'#ece8e2',tickcolor:'transparent',
+           tickfont:{family:'system-ui',size:10,color:'#888'},zeroline:false},
+    yaxis:{visible:false},
+    showlegend:true,
+    legend:{orientation:'h',y:-0.28,x:0.5,xanchor:'center',font:{size:10,family:F},traceorder:'normal'},
+    font:{family:F},
+    annotations:[
+      {x: PRE_EPA_MI / 2, y: 1.18, xref:'x', yref:'paper',
+       text:'<b style="font-size:14px">\u2190 Pre-EPA era \u2192</b><br><span style="font-size:12px">88,058 miles \u00b7 39.2% of the network</span>',
+       showarrow:false, xanchor:'center', yanchor:'bottom',
+       font:{color:'#9B1C1C',size:12,family:F}, bgcolor:'rgba(250,250,248,0)'},
+      {x: PRE_EPA_MI + MILES.slice(6,10).reduce(function(a,b){return a+b;},0) + MILES[10]/2,
+       y: 1.18, xref:'x', yref:'paper',
+       text:'<span style="font-size:11px">2010s \u00b7 45,965 mi</span>',
+       showarrow:false, xanchor:'center', yanchor:'bottom',
+       font:{color:'#166534',size:11,family:F}},
+    ],
+    shapes:[
+      {type:'line',x0:0,x1:PRE_EPA_MI,y0:1.14,y1:1.14,xref:'x',yref:'paper',line:{color:'#9B1C1C',width:2}},
+      {type:'line',x0:0,x1:0,y0:1.10,y1:1.14,xref:'x',yref:'paper',line:{color:'#9B1C1C',width:2}},
+      {type:'line',x0:PRE_EPA_MI,x1:PRE_EPA_MI,y0:1.10,y1:1.14,xref:'x',yref:'paper',line:{color:'#9B1C1C',width:2}},
+      {type:'line',x0:PRE_1980,x1:PRE_1980,y0:0.42,y1:0.58,xref:'x',yref:'paper',line:{color:'#EAB308',width:1.5,dash:'dash'}},
+    ],
+  };
+  Plotly.newPlot('chart-3a', traces, layout, {responsive:true, displayModeBar:false});
+}());
+</script>
+
+
+<!-- ═══════════════════════════════════════════════ SECTION 4 · NETWORK SHAPE -->
+<section class="s-prose">
+  <div class="col">
+    <h2 class="s-hed">The Shape of the Network</h2>
+    <p class="body-copy">The network&#8217;s age profile records two construction eras. The first came at mid-century, when postwar demand drove rapid building under minimal federal oversight. Construction slowed through the 1980s and 1990s, then surged again during the shale years of the 2010s. Five decades of advances in metallurgy, welding, corrosion control, and regulation separate the two eras. Pipe from both is in service today, side by side in the same network.</p>
+  </div>
+</section>
+
+<div class="s-chart">
+  <div class="wide">
+    <p class="chart-hed">The 2010s Built More Pipeline Than Any Other Decade &#8212; But the Mid-Century Network Lingers</p>
+    <p class="chart-dek">Miles of active U.S. hazardous liquid pipeline by installation decade, 2024 &nbsp;&#183;&nbsp; Radius proportional to miles</p>
+    <div id="chart-3c"></div>
+    <p class="chart-src">Source: PHMSA Annual Report Form 7000-1.1, Part I (2024). 3,696 miles with unknown installation date excluded. Total shown: 224,818 miles.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ec3c = echarts.init(document.getElementById('chart-3c'), null, {renderer:'canvas'});
+  var decades = ['Pre-1920','1920s','1930s','1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s','2020s'];
+  var miles   = [118,2129,5439,15020,32338,33014,29050,17220,18430,16445,45965,9650];
+  var total   = miles.reduce(function(a,b){return a+b;},0);
+  var colors  = ['#7F1D1D','#9D1B1B','#C41818','#DC2626','#EF4444','#F97316','#EAB308','#84CC16','#22C55E','#16A34A','#166534','#14532D'];
+
+  ec3c.setOption({
+    backgroundColor: '#FFFFFF',
+    tooltip: {
+      trigger: 'item',
+      formatter: function(p) {
+        var pct = (p.value / total * 100).toFixed(1);
+        var era = p.dataIndex < 6 ? '<br><b style="color:#9B1C1C">Pre-EPA era</b>' : '';
+        return '<b>' + p.name + '</b><br>' + p.value.toLocaleString() + ' miles (' + pct + '% of network)' + era;
+      },
+      textStyle: {fontFamily: 'Georgia, serif', fontSize: 12},
+      backgroundColor: 'rgba(250,250,248,0.97)',
+      borderColor: '#ddd', borderWidth: 1,
+    },
+    graphic: [{
+      type: 'group', left: 'center', top: '46.5%',
+      children: [
+        {type:'text', left:'center', top:0,
+         style:{text:'39.2%', textAlign:'center', fill:'#9B1C1C',
+                fontSize:28, fontFamily:'Georgia, serif', fontWeight:'bold'}},
+        {type:'text', left:'center', top:38,
+         style:{text:'predates the EPA', textAlign:'center', fill:'#9B1C1C',
+                fontSize:11, fontFamily:'Georgia, serif'}},
+        {type:'text', left:'center', top:56,
+         style:{text:'88,058 miles', textAlign:'center', fill:'#888',
+                fontSize:10, fontFamily:'system-ui, sans-serif'}}
+      ]
+    }],
+    series: [{
+      type: 'pie',
+      radius: ['22%', '76%'],
+      center: ['50%', '52%'],
+      roseType: 'area',
+      itemStyle: {borderColor: '#FFFFFF', borderWidth: 2},
+      label: {
+        show: true,
+        formatter: function(p) {
+          var k = p.value >= 1000 ? Math.round(p.value / 1000) + 'k' : p.value;
+          return '{dec|' + p.name + '}\n{mi|' + k + ' mi}';
+        },
+        rich: {
+          dec: {fontFamily:'Georgia, serif', fontSize:11, fontWeight:'bold',
+                color:'#1a1a1a', lineHeight:16, align:'center'},
+          mi:  {fontFamily:'system-ui, sans-serif', fontSize:9,
+                color:'#666', lineHeight:14, align:'center'}
+        }
+      },
+      labelLine: {length:14, length2:10, lineStyle:{width:1, color:'#bbb'}},
+      emphasis: {itemStyle:{shadowBlur:12, shadowColor:'rgba(0,0,0,0.2)'}},
+      data: decades.map(function(d,i) {
+        return {name:d, value:miles[i], itemStyle:{color:colors[i]}};
+      })
+    }]
+  });
+  window.addEventListener('resize', function() { ec3c.resize(); });
+}());
+</script>
+
+
+<!-- ═══════════════════════════════════════════════ SECTION 5 · STASIS -->
+<section class="s-prose">
+  <div class="col">
+    <h2 class="s-hed">What Is Not Being Replaced</h2>
+    <p class="body-copy">One might expect the oldest pipe to be retired at a meaningful rate. The data show otherwise. Between 2017 and 2024, operators added nearly 22,000 miles of new pipeline while pre-1970 mileage declined by roughly 4,500. At that rate, retirement of the pre-EPA network would extend more than a century into the future. New construction has expanded the system; it has not replaced it.</p>
+  </div>
+</section>
+
+<div class="s-chart">
+  <div class="wide">
+    <p class="chart-hed">New Construction Outpaces Retirement &#8212; But the Old Pipe Barely Moves</p>
+    <p class="chart-dek">Miles of active pipeline per installation decade, 2017 vs. 2024 &nbsp;&#183;&nbsp; Open dot = 2017 &nbsp;&bull;&nbsp; Filled dot = 2024</p>
+    <div class="callout-row">
+      <div class="callout red"><div class="cnum">&minus;4,548</div><div class="clabel">Miles of pre-1970 pipeline<br>retired in 8 years</div></div>
+      <div class="callout grn"><div class="cnum">+21,764</div><div class="clabel">Miles of post-2010 pipeline<br>added in 8 years</div></div>
+      <div class="callout gray"><div class="cnum">~155 yrs</div><div class="clabel">To retire all pre-1970 pipe<br>at current pace</div></div>
+    </div>
+    <div id="chart-aging"></div>
+    <p class="chart-src">Source: PHMSA Annual Report Form 7000-1.1, Part I (2017 and 2024). Rows with unknown installation date excluded (~6,500 miles in 2017, ~3,700 in 2024).</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var agingData = [
+    {dec:"Pre-1920", v17:207,   v24:118,   color:"#7F1D1D"},
+    {dec:"1920s",    v17:2451,  v24:2129,  color:"#9D1B1B"},
+    {dec:"1930s",    v17:5025,  v24:5439,  color:"#C41818"},
+    {dec:"1940s",    v17:15752, v24:15020, color:"#DC2626"},
+    {dec:"1950s",    v17:34946, v24:32338, color:"#EF4444"},
+    {dec:"1960s",    v17:34225, v24:33014, color:"#F97316"},
+    {dec:"1970s",    v17:29968, v24:29050, color:"#EAB308"},
+    {dec:"1980s",    v17:17411, v24:17220, color:"#84CC16"},
+    {dec:"1990s",    v17:18973, v24:18430, color:"#22C55E"},
+    {dec:"2000s",    v17:16846, v24:16445, color:"#16A34A"},
+    {dec:"2010s",    v17:33851, v24:45965, color:"#166534"},
+    {dec:"2020s",    v17:0,     v24:9650,  color:"#14532D"},
+  ];
+  var rows = agingData.slice().reverse();
+  var F = "Georgia, 'Times New Roman', serif";
+  var traces = [];
+
+  rows.forEach(function(d) {
+    traces.push({type:'scatter',mode:'lines',x:[d.v17,d.v24],y:[d.dec,d.dec],
+                 line:{color:d.color,width:2.2},showlegend:false,hoverinfo:'skip'});
+  });
+  traces.push({
+    type:'scatter', mode:'markers',
+    x: rows.map(function(d){return d.v17;}),
+    y: rows.map(function(d){return d.dec;}),
+    name:'2017',
+    marker:{symbol:'circle-open', color:rows.map(function(d){return d.color;}),
+            size:11, line:{width:2}},
+    hovertemplate:'<b>%{y} \u2014 2017</b><br>%{x:,.0f} miles<extra></extra>',
+  });
+  traces.push({
+    type:'scatter', mode:'markers',
+    x: rows.map(function(d){return d.v24;}),
+    y: rows.map(function(d){return d.dec;}),
+    name:'2024',
+    marker:{symbol:'circle', color:rows.map(function(d){return d.color;}),
+            size:13, line:{color:'white',width:1.5}},
+    hovertemplate:'<b>%{y} \u2014 2024</b><br>%{x:,.0f} miles<extra></extra>',
+  });
+
+  var changeAnnot = rows.map(function(d) {
+    var diff = d.v24 - d.v17;
+    var sign = diff >= 0 ? '+' : '';
+    var col  = diff >= 0 ? '#166534' : '#9B1C1C';
+    return {x:Math.max(d.v17,d.v24), y:d.dec, xref:'x', yref:'y',
+            text: sign + diff.toLocaleString(),
+            showarrow:false, xanchor:'left', xshift:12, yanchor:'middle',
+            font:{size:10.5, color:col, family:'system-ui'}};
+  });
+  changeAnnot.push({x:0,y:'2020s',xref:'x',yref:'y',text:'0 mi in 2017',
+                    showarrow:false,xanchor:'left',xshift:14,yanchor:'middle',
+                    font:{size:9.5,color:'#888',family:'system-ui'}});
+
+  var layout = {
+    paper_bgcolor:'#FFFFFF', plot_bgcolor:'#FFFFFF',
+    margin:{t:12,r:95,b:52,l:80}, height:430,
+    xaxis:{tickformat:',d',ticksuffix:' mi',range:[0,53000],
+           gridcolor:'#ece8e2',tickcolor:'transparent',
+           tickfont:{family:'system-ui',size:10,color:'#888'},
+           zeroline:true,zerolinecolor:'#ddd',zerolinewidth:1,
+           title:{text:'Miles of active pipeline',font:{size:11,color:'#888',family:'system-ui'},standoff:10}},
+    yaxis:{tickfont:{family:F,size:12,color:'#333'},
+           gridcolor:'#ece8e2',tickcolor:'transparent',zeroline:false},
+    legend:{orientation:'h',x:0.5,y:-0.16,xanchor:'center',
+            font:{size:12,family:F},itemsizing:'constant'},
+    annotations: changeAnnot,
+    shapes:[{type:'rect',xref:'paper',yref:'y',x0:0,x1:1,
+             y0:'Pre-1920',y1:'1960s',fillcolor:'rgba(155,28,28,0.04)',line:{width:0}}],
+    font:{family:F},
+  };
+  Plotly.newPlot('chart-aging', traces, layout, {responsive:true, displayModeBar:false});
+}());
+</script>
+
+
+<!-- ═══════════════════════════════════════════════ SECTION 6 · TEASER + FOOTER -->
+<section class="s-footer">
+  <div class="col">
+    <p class="part2-label">Coming next &nbsp;&#8212;&nbsp; Part 2</p>
+    <h2 class="coming-next">The Files</h2>
+    <p class="teaser-text">Aging pipe fails in documented, recurring ways. Since 2010, operators have reported more than 5,900 incidents to federal regulators: ruptures, leaks, and releases into fields and waterways. The federal records identify each operator by name. They record the barrels released and the barrels recovered, and the gap between those figures is concentrated among a small number of companies. Part 2 opens the files.</p>
+
+    <div class="methods-block">
+      <h3>Data &amp; Methods</h3>
+      <p><b>Annual report data:</b> PHMSA Form 7000-1.1, Hazardous Liquid Annual Report, Parts A&#8211;E and I (2017&#8211;2024). Available at phmsa.dot.gov. Mileage totals and installation-decade breakdowns aggregated nationally across all operators and states. Rows with unknown installation decade excluded from age analyses (approx. 1.6% of total in 2024).</p>
+      <p><b>Mileage summary:</b> PHMSA Hazardous Liquid Annual Statistics (haz_liquid_annual_stat.xls, 2004&#8211;2024). Used for commodity-level mileage trends.</p>
+      <p><b>Incident data:</b> PHMSA Hazardous Liquid Accident Database (tab-delimited, 2010&#8211;present and 2002&#8211;2009). Used in Part 2.</p>
+      <p><b>Note:</b> This analysis covers hazardous liquid pipelines only (crude oil, refined petroleum products, highly volatile liquids, CO&#x2082;, and ethanol). Natural gas pipelines are a separate PHMSA reporting system and are not included.</p>
+    </div>
+  </div>
+</section>
+
+
+</body>
+</html>
