@@ -3,10 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Invisible Network — PHMSA Pipeline Infrastructure</title>
-<!-- Libraries loaded once; Plotly for charts 1A / 3A / aging; ECharts for 3C -->
+<title>The Invisible Network -- PHMSA Pipeline Infrastructure</title>
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<!-- Scrollama: scroll-driven annotation reveals (The Pudding's library) -->
+<!-- Usage example at bottom of file; wire into chart-ops for per-operator highlighting -->
+<script src="https://unpkg.com/scrollama"></script>
 <style>
 /* ── Reset & base ────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,20 +17,20 @@ body {
   background: #FAFAF8;
   color: #1a1a1a;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 1.0625rem;   /* 17px */
+  font-size: 1.0625rem;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
 }
 
 /* ── Layout containers ───────────────────────── */
-.col {                          /* prose column */
+.col {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 24px;
   padding-right: 24px;
 }
-.wide {                         /* chart + chart-header column */
+.wide {
   max-width: 1080px;
   margin-left: auto;
   margin-right: auto;
@@ -41,6 +43,7 @@ body {
 .s-prose   { padding: 64px 0 40px; }
 .s-chart   { padding: 40px 0 72px; background: #FFFFFF; border-top: 1px solid #ece8e2; border-bottom: 1px solid #ece8e2; }
 .s-footer  { padding: 64px 0 80px; border-top: 3px solid #1a1a1a; }
+.s-closing { padding-bottom: 80px; }
 
 /* ── Section 1: title block ──────────────────── */
 .kicker {
@@ -51,6 +54,8 @@ body {
   text-transform: uppercase;
   color: #9B1C1C;
   margin-bottom: 20px;
+  padding-top: 14px;
+  border-top: 2px solid #e0dbd4;
 }
 h1.title-hed {
   font-size: clamp(2.2rem, 5vw, 3.4rem);
@@ -90,7 +95,7 @@ p.body-copy {
 }
 p.body-copy + p.body-copy { margin-top: 20px; }
 
-/* ── Chart block headers (inside .wide) ─────── */
+/* ── Chart block headers ─────────────────────── */
 p.chart-hed {
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 1.25rem;
@@ -117,11 +122,49 @@ p.chart-src {
   max-width: 900px;
 }
 #chart-1a,
-#chart-3a  { width: 100%; }
-#chart-3c  { width: 100%; height: 600px; }
+#chart-3a,
+#chart-inc-line,
+#chart-inc-comp,
+#chart-ops   { width: 100%; }
+#chart-3c    { width: 100%; height: 600px; }
 #chart-aging { width: 100%; }
+#chart-inc-comp { margin-top: 0; }
 
-/* ── Callout cards (aging section) ──────────── */
+/* ── Incident chart shared panel wrapper ─────── */
+.inc-panels {
+  background: #FAFAF8;
+  border: 1px solid #ece8e2;
+  border-radius: 3px;
+  padding: 12px 0 4px;
+  margin-bottom: 4px;
+}
+.inc-panels > div { margin: 0; }
+
+/* ── Cause legend ────────────────────────────── */
+.cause-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 10px;
+}
+.cause-legend span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.69rem;
+  color: #777;
+  white-space: nowrap;
+}
+.cause-legend .clr {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Callout cards ───────────────────────────── */
 .callout-row {
   display: flex;
   gap: 24px;
@@ -152,50 +195,104 @@ p.chart-src {
 .callout.gray .cnum { color: #555; }
 .callout.grn  .cnum { color: #166534; }
 
-/* ── Section 6: footer block ─────────────────── */
-p.teaser-text {
+/* ── Photographs ─────────────────────────────── */
+figure.fig-full {
+  margin: 0;
+  border-top: 1px solid #ece8e2;
+  border-bottom: 1px solid #ece8e2;
+  overflow: hidden;
+  min-height: 200px;
+  background: #e8e4de;
+}
+figure.fig-full img {
+  display: block;
+  width: 100%;
+  max-height: 68vh;
+  object-fit: cover;
+}
+figure.fig-col {
+  margin: 28px 0 8px;
+  min-height: 120px;
+  background: #e8e4de;
+}
+figure.fig-col img {
+  display: block;
+  width: 100%;
+  border: 1px solid #e0dbd4;
+  min-height: 120px;
+  object-fit: cover;
+}
+figure.fig-inline {
+  float: right;
+  width: 44%;
+  margin: 4px 0 16px 28px;
+  min-height: 100px;
+  background: #e8e4de;
+}
+figure.fig-inline img {
+  display: block;
+  width: 100%;
+  border: 1px solid #e0dbd4;
+}
+figcaption {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.7rem;
+  font-style: italic;
+  color: #999;
+  padding-top: 5px;
+  line-height: 1.45;
+}
+@media (max-width: 560px) {
+  figure.fig-inline {
+    float: none;
+    width: 100%;
+    margin: 16px 0;
+  }
+}
+
+/* ── Operator chart mobile scroll ────────────── */
+.chart-ops-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.chart-ops-wrap > div { min-width: 520px; }
+
+/* ── Closing copy ────────────────────────────── */
+.closing-copy {
   font-size: 1.05rem;
   line-height: 1.78;
   color: #2a2a2a;
-  margin-bottom: 32px;
 }
-.part2-label {
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #9B1C1C;
-  margin-bottom: 10px;
-}
-h2.coming-next {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 28px;
-  color: #1a1a1a;
-}
+
+/* ── Footer methods block ────────────────────── */
 .methods-block {
   margin-top: 48px;
   padding-top: 24px;
   border-top: 1px solid #e0dbd4;
 }
-.methods-block h3 {
+.methods-toggle {
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #888;
-  margin-bottom: 12px;
+  cursor: pointer;
+  list-style: none;
+  padding: 0;
 }
-.methods-block p {
+.methods-toggle::-webkit-details-marker { display: none; }
+.methods-toggle::before { content: '+ '; color: #9B1C1C; }
+details[open] .methods-toggle::before { content: '\2212  '; color: #9B1C1C; }
+.methods-content { margin-top: 12px; }
+.methods-content p {
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.8rem;
   color: #777;
   line-height: 1.6;
   max-width: 660px;
 }
-.methods-block p + p { margin-top: 8px; }
+.methods-content p + p { margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -212,11 +309,23 @@ h2.coming-next {
 </section>
 
 
+<!-- ════ PHOTO (a) · Full-width, between cold open and Section 2 ══════════ -->
+<figure class="fig-full">
+  <img src="images/photo-01.jpg" alt="" loading="lazy">
+  <div class="col"><figcaption>CAPTION + CREDIT TBD</figcaption></div>
+</figure>
+
+
 <!-- ═══════════════════════════════════════════════ SECTION 2 · GROWTH -->
 <section class="s-prose">
   <div class="col">
     <h2 class="s-hed">The Boom Nobody Watched</h2>
     <p class="body-copy">Between 2004 and 2019, the shale revolution drove the largest oil infrastructure expansion in American history, adding 34,000 miles of crude pipeline in a single decade. The expansion drew little public attention. The controversies that did surface, Keystone XL and Dakota Access among them, concerned individual lines while the network itself grew by thousands of miles each year.</p>
+    <!-- PHOTO (b) · Floated beside Kalamazoo paragraph -->
+    <figure class="fig-inline">
+      <img src="images/photo-02.jpg" alt="" loading="lazy">
+      <figcaption>CAPTION + CREDIT TBD</figcaption>
+    </figure>
     <p class="body-copy">In July 2010, midway through the boom, a ruptured pipeline released more than 840,000 gallons of crude into Michigan&#8217;s Kalamazoo River, the largest inland oil spill in United States history. Cleanup costs exceeded one billion dollars. The pipe had been installed in 1969. That year matters to everything that follows.</p>
   </div>
 </section>
@@ -241,8 +350,8 @@ h2.coming-next {
   var F = "Georgia, 'Times New Roman', serif";
   function aS(color) {
     return {font:{size:11,color:color,family:F},bgcolor:'rgba(250,250,248,0.94)',
-            borderpad:4,borderwidth:1,bordercolor:color,
-            showarrow:true,arrowhead:2,arrowsize:1,arrowwidth:1.4,arrowcolor:color};
+            borderpad:4,borderwidth:0,
+            showarrow:true,arrowhead:2,arrowsize:1,arrowwidth:1.6,arrowcolor:color};
   }
 
   var traces = [
@@ -256,40 +365,69 @@ h2.coming-next {
      hovertemplate:'<b>Refined products</b><br>%{x}: %{y:,.0f} miles<extra></extra>'},
   ];
 
-  var layout = {
-    paper_bgcolor:'#FFFFFF', plot_bgcolor:'#FFFFFF',
-    margin:{t:12,r:195,b:52,l:72},
-    xaxis:{tickmode:'linear',dtick:2,range:[2003.5,2028],gridcolor:'#ece8e2',
-           tickcolor:'transparent',tickfont:{family:'system-ui',size:11,color:'#777'},zeroline:false},
-    yaxis:{tickformat:',d',ticksuffix:' mi',range:[35000,250000],gridcolor:'#ece8e2',
-           tickcolor:'transparent',tickfont:{family:'system-ui',size:11,color:'#777'},zeroline:false},
-    hovermode:'x unified', showlegend:false, font:{family:F},
-    annotations:[
-      {x:2024.8,y:228514,xref:'x',yref:'y',text:'<b>Total</b><br>228,514 mi',
-       showarrow:false,xanchor:'left',yanchor:'middle',font:{size:12,color:'#1a1a1a',family:F}},
-      {x:2024.8,y:86700,xref:'x',yref:'y',text:'<b>Crude oil</b><br>83,209 mi',
-       showarrow:false,xanchor:'left',yanchor:'middle',font:{size:12,color:'#9B1C1C',family:F}},
-      {x:2024.8,y:75708,xref:'x',yref:'y',text:'<b>HVL</b><br>75,708 mi',
-       showarrow:false,xanchor:'left',yanchor:'middle',font:{size:12,color:'#166534',family:F}},
-      {x:2024.8,y:61500,xref:'x',yref:'y',text:'<b>Refined</b><br>64,231 mi',
-       showarrow:false,xanchor:'left',yanchor:'middle',font:{size:12,color:'#1D4ED8',family:F}},
-      Object.assign({x:2008,y:173789,ax:0,ay:-52,text:'<b>Shale boom begins</b>'},aS('#555')),
-      Object.assign({x:2010,y:181836,ax:20,ay:58,
-        text:'<b>Kalamazoo River spill</b><br><span style="font-size:10px">Enbridge Line 6B &nbsp;&#x2022;&nbsp; $1.2B cleanup</span>'},aS('#9B1C1C')),
-      Object.assign({x:2019,y:225499,ax:0,ay:-50,
-        text:'<b>Crude peaks: 84,475 mi</b><br><span style="font-size:10px">+71% since 2004</span>'},aS('#9B1C1C')),
-      Object.assign({x:2021,y:230036,ax:36,ay:-38,text:'<b>Network peak: 230,036 mi</b>'},aS('#555')),
-    ],
-    shapes:[
-      {type:'line',x0:2008,x1:2008,y0:35000,y1:250000,line:{color:'rgba(180,170,160,0.5)',width:1,dash:'dot'}},
-      {type:'line',x0:2010,x1:2010,y0:35000,y1:250000,line:{color:'rgba(155,28,28,0.35)',width:1,dash:'dot'}},
-      {type:'line',x0:2019,x1:2019,y0:35000,y1:250000,line:{color:'rgba(155,28,28,0.35)',width:1,dash:'dot'}},
-      {type:'line',x0:2021,x1:2021,y0:35000,y1:250000,line:{color:'rgba(180,170,160,0.5)',width:1,dash:'dot'}},
-    ]
-  };
-  Plotly.newPlot('chart-1a', traces, layout, {responsive:true, displayModeBar:false});
+  var endLabels = [
+    {x:2024.6,y:228514,xref:'x',yref:'y',text:'<b>Total</b><br>228,514 mi',
+     showarrow:false,xanchor:'left',yanchor:'middle',font:{size:12,color:'#1a1a1a',family:F}},
+    {x:2024.6,y:86700,xref:'x',yref:'y',text:'<b>Crude oil</b><br>83,209 mi',
+     showarrow:false,xanchor:'left',yanchor:'middle',font:{size:12,color:'#9B1C1C',family:F}},
+    {x:2024.6,y:75708,xref:'x',yref:'y',text:'<b>HVL</b><br>75,708 mi',
+     showarrow:false,xanchor:'left',yanchor:'middle',font:{size:12,color:'#166534',family:F}},
+    {x:2024.6,y:61500,xref:'x',yref:'y',text:'<b>Refined</b><br>64,231 mi',
+     showarrow:false,xanchor:'left',yanchor:'middle',font:{size:12,color:'#1D4ED8',family:F}},
+  ];
+  var eventAnnotations = [
+    Object.assign({x:2008,y:173789,ax:0,ay:-52,text:'<b>Shale boom begins</b>'},aS('#555')),
+    Object.assign({x:2010,y:181836,ax:20,ay:58,
+      text:'<b>Kalamazoo River spill</b><br><span style="font-size:10px">Enbridge Line 6B &nbsp;&#x2022;&nbsp; $1.2B cleanup</span>'},aS('#9B1C1C')),
+    Object.assign({x:2019,y:225499,ax:0,ay:-50,
+      text:'<b>Crude peaks: 84,475 mi</b><br><span style="font-size:10px">+71% since 2004</span>'},aS('#9B1C1C')),
+    Object.assign({x:2021,y:230036,ax:36,ay:-38,text:'<b>Network peak: 230,036 mi</b>'},aS('#555')),
+  ];
+
+  var shapes = [
+    {type:'line',x0:2008,x1:2008,y0:35000,y1:250000,line:{color:'rgba(180,170,160,0.5)',width:1,dash:'dot'}},
+    {type:'line',x0:2010,x1:2010,y0:35000,y1:250000,line:{color:'rgba(155,28,28,0.35)',width:1,dash:'dot'}},
+    {type:'line',x0:2019,x1:2019,y0:35000,y1:250000,line:{color:'rgba(155,28,28,0.35)',width:1,dash:'dot'}},
+    {type:'line',x0:2021,x1:2021,y0:35000,y1:250000,line:{color:'rgba(180,170,160,0.5)',width:1,dash:'dot'}},
+  ];
+
+  function makeLayout(wide) {
+    return {
+      paper_bgcolor:'#FFFFFF', plot_bgcolor:'#FFFFFF',
+      margin:{t:12, r: wide ? 195 : 12, b:52, l:72},
+      xaxis:{tickmode:'linear',dtick:2,range:[2003.5, wide ? 2028 : 2025.5],
+             gridcolor:'#ece8e2',tickcolor:'transparent',
+             tickfont:{family:'system-ui',size:11,color:'#777'},zeroline:false},
+      yaxis:{tickformat:',d',ticksuffix:' mi',range:[35000,250000],gridcolor:'#ece8e2',
+             tickcolor:'transparent',tickfont:{family:'system-ui',size:11,color:'#777'},zeroline:false},
+      hovermode:'x unified',
+      showlegend: !wide,
+      legend: wide ? {} : {orientation:'h',y:-0.18,x:0.5,xanchor:'center',font:{size:11,family:F}},
+      font:{family:F},
+      annotations: wide ? endLabels.concat(eventAnnotations) : eventAnnotations,
+      shapes: shapes,
+    };
+  }
+
+  var wide = document.getElementById('chart-1a').offsetWidth > 580;
+  Plotly.newPlot('chart-1a', traces, makeLayout(wide), {responsive:true, displayModeBar:false});
+  window.addEventListener('resize', function () {
+    var w = document.getElementById('chart-1a').offsetWidth > 580;
+    if (w !== wide) { wide = w; Plotly.relayout('chart-1a', makeLayout(w)); }
+  });
 }());
 </script>
+
+
+<!-- ════ PHOTO (c) · Column-width, between growth chart and Section 3 ════ -->
+<section class="s-prose" style="padding-top:40px;padding-bottom:0">
+  <div class="col">
+    <figure class="fig-col">
+      <img src="images/photo-03.jpg" alt="" loading="lazy">
+      <figcaption>CAPTION + CREDIT TBD</figcaption>
+    </figure>
+  </div>
+</section>
 
 
 <!-- ═══════════════════════════════════════════════ SECTION 3 · PRE-EPA -->
@@ -342,14 +480,13 @@ h2.coming-next {
   var layout = {
     paper_bgcolor:'#FFFFFF', plot_bgcolor:'#FFFFFF',
     barmode:'stack',
-    margin:{t:80,r:24,b:80,l:24},
-    height:320,
+    margin:{t:80,r:24,b:40,l:24},
+    height:280,
     xaxis:{range:[0, TOTAL * 1.01],tickformat:',d',ticksuffix:' mi',
            gridcolor:'#ece8e2',tickcolor:'transparent',
            tickfont:{family:'system-ui',size:10,color:'#888'},zeroline:false},
     yaxis:{visible:false},
-    showlegend:true,
-    legend:{orientation:'h',y:-0.28,x:0.5,xanchor:'center',font:{size:10,family:F},traceorder:'normal'},
+    showlegend:false,
     font:{family:F},
     annotations:[
       {x: PRE_EPA_MI / 2, y: 1.18, xref:'x', yref:'paper',
@@ -384,8 +521,8 @@ h2.coming-next {
 
 <div class="s-chart">
   <div class="wide">
-    <p class="chart-hed">The 2010s Built More Pipeline Than Any Other Decade &#8212; But the Mid-Century Network Lingers</p>
-    <p class="chart-dek">Miles of active U.S. hazardous liquid pipeline by installation decade, 2024 &nbsp;&#183;&nbsp; Radius proportional to miles</p>
+    <p class="chart-hed">Two Surges, Seven Decades Apart: The Network&#8217;s Age in One View</p>
+    <p class="chart-dek">Miles of active U.S. hazardous liquid pipeline by installation decade, 2024 &nbsp;&#183;&nbsp; Petal area proportional to miles &nbsp;&#183;&nbsp; Pre-EPA decades highlighted in crimson</p>
     <div id="chart-3c"></div>
     <p class="chart-src">Source: PHMSA Annual Report Form 7000-1.1, Part I (2024). 3,696 miles with unknown installation date excluded. Total shown: 224,818 miles.</p>
   </div>
@@ -557,22 +694,377 @@ h2.coming-next {
 </script>
 
 
-<!-- ═══════════════════════════════════════════════ SECTION 6 · TEASER + FOOTER -->
+<!-- ═══════════════════════════════════════════════ SECTION 6 · INCIDENTS -->
+<section class="s-prose">
+  <div class="col">
+    <h2 class="s-hed">When the Pipe Fails</h2>
+    <p class="body-copy">Aging pipe fails in documented, recurring ways. Since 2010, operators have reported 5,560 incidents to federal regulators through the end of 2024: ruptures, leaks, and releases into fields and waterways. Corrosion, the failure mode most closely tied to age, remains among the leading causes.</p>
+  </div>
+</section>
+
+<div class="s-chart">
+  <div class="wide">
+    <p class="chart-hed">Overall Pipeline Incidents Have Fallen Since 2015. Corrosion&#8217;s Share Has Not.</p>
+    <p class="chart-dek">Reported incidents per year, 2002&#8211;2024 &nbsp;&#183;&nbsp; Top: total &nbsp;&#183;&nbsp; Bottom: cause share &nbsp;&#183;&nbsp; Hover for detail</p>
+    <!-- Shared panel wrapper gives visual unity to the two-part chart -->
+    <div class="inc-panels">
+      <div id="chart-inc-line"></div>
+      <div id="chart-inc-comp"></div>
+    </div>
+    <div class="cause-legend">
+      <span><span class="clr" style="background:#9B1C1C"></span>Corrosion</span>
+      <span><span class="clr" style="background:#B87060"></span>Material / weld</span>
+      <span><span class="clr" style="background:#A89070"></span>Excavation</span>
+      <span><span class="clr" style="background:#8090A0"></span>Natural forces</span>
+      <span><span class="clr" style="background:#A09888"></span>Outside force / other</span>
+      <span><span class="clr" style="background:#B0A89A"></span>Incorrect operation</span>
+      <span><span class="clr" style="background:#D1C9BF"></span>Equipment failure</span>
+    </div>
+    <p class="chart-src">Source: PHMSA Hazardous Liquid Accident Database (2002&#8211;2009 and 2010&#8211;present). Complete years 2002&#8211;2024 only (8,590 total incidents). 2002&#8211;2009 cause categories mapped to 2010&#8211;present schema. Kalamazoo River spill (July 2010) noted.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var F = "Georgia, 'Times New Roman', serif";
+  var yr = [2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+  var tot= [448,432,377,369,354,332,376,342,350,344,367,400,455,460,420,415,405,384,332,347,295,299,287];
+  var corr=[96,95,90,81,91,81,81,77,71,79,100,74,88,103,90,76,56,71,65,97,66,88,80];
+  var equip=[176,152,131,114,118,103,119,128,153,154,144,174,218,209,187,185,221,185,164,147,131,134,138];
+  var incop=[46,47,26,34,46,36,46,41,36,36,55,69,72,59,65,69,58,76,49,38,46,36,28];
+  var mat=  [47,54,41,54,31,48,63,44,35,24,25,35,24,29,33,31,24,16,22,19,22,19,17];
+  var exc=  [32,27,27,19,18,21,21,18,16,20,11,14,13,17,8,18,20,10,12,7,4,10,5];
+  var nat=  [13,18,24,37,14,17,23,16,19,11,15,14,22,22,17,26,14,17,10,30,16,3,8];
+  var other=[38,39,38,30,36,26,23,18,20,20,17,20,18,21,20,10,12,9,10,9,10,9,11];
+
+  /* ── Top chart: total incidents line ── */
+  var annS = function(color) {
+    return {font:{size:10,color:color,family:F},bgcolor:'rgba(250,250,248,0.92)',
+            borderpad:3,borderwidth:0,
+            showarrow:true,arrowhead:2,arrowsize:0.9,arrowwidth:1.4,arrowcolor:color};
+  };
+
+  var lineLayout = {
+    paper_bgcolor:'transparent', plot_bgcolor:'transparent',
+    margin:{t:16,r:24,b:0,l:56}, height:196,
+    xaxis:{tickmode:'linear',dtick:2,range:[2001.5,2025],gridcolor:'#ece8e2',
+           tickcolor:'transparent',tickfont:{family:'system-ui',size:10,color:'#888'},
+           zeroline:false, showticklabels:false},
+    yaxis:{tickformat:',d',range:[240,510],gridcolor:'#ece8e2',
+           tickcolor:'transparent',tickfont:{family:'system-ui',size:10,color:'#888'},
+           zeroline:false,
+           title:{text:'Incidents / yr',font:{size:10,color:'#888',family:'system-ui'},standoff:6}},
+    showlegend:false, font:{family:F},
+    annotations:[
+      Object.assign({x:2010,y:350,ax:28,ay:-36,
+        text:'<b>Kalamazoo</b><br><span style="font-size:9px">2010</span>'},annS('#9B1C1C')),
+      Object.assign({x:2015,y:460,ax:0,ay:-34,
+        text:'<b>Peak: 460</b>'},annS('#555')),
+      {x:2024,y:287,xref:'x',yref:'y',text:'287 in 2024',
+       showarrow:false,xanchor:'right',yanchor:'bottom',xshift:-4,yshift:4,
+       font:{size:9.5,color:'#555',family:'system-ui'}},
+    ],
+    shapes:[
+      {type:'line',x0:2010,x1:2010,y0:240,y1:510,line:{color:'rgba(155,28,28,0.3)',width:1,dash:'dot'}},
+      {type:'line',x0:2015,x1:2015,y0:240,y1:510,line:{color:'rgba(100,100,100,0.3)',width:1,dash:'dot'}},
+    ],
+  };
+
+  Plotly.newPlot('chart-inc-line',
+    [{type:'scatter',x:yr,y:tot,mode:'lines',
+      line:{color:'#1a1a1a',width:2.8},
+      fill:'tozeroy',fillcolor:'rgba(220,210,200,0.28)',
+      hovertemplate:'<b>%{x}</b>: %{y} incidents<extra></extra>'}],
+    lineLayout, {responsive:true,displayModeBar:false});
+
+  /* ── Bottom chart: cause composition (100% stacked bars) ──
+     FIX: Corrosion is FIRST trace = bottom of stack.
+     Equipment failure is LAST trace = top of stack. */
+  var pct = function(arr, i) { return arr[i] / tot[i] * 100; };
+
+  /* Order: bottom (first) → top (last) */
+  var causeOrder = [
+    {label:'Corrosion',            arr:corr,  color:'#9B1C1C'},
+    {label:'Material / weld',      arr:mat,   color:'#B87060'},
+    {label:'Excavation damage',    arr:exc,   color:'#A89070'},
+    {label:'Natural forces',       arr:nat,   color:'#8090A0'},
+    {label:'Outside force / other',arr:other, color:'#A09888'},
+    {label:'Incorrect operation',  arr:incop, color:'#B0A89A'},
+    {label:'Equipment failure',    arr:equip, color:'#D1C9BF'},
+  ];
+
+  var compTraces = causeOrder.map(function(c) {
+    return {
+      type:'bar', x:yr,
+      y: yr.map(function(_,i){ return pct(c.arr,i); }),
+      name: c.label,
+      marker:{color: c.color, line:{width:0}},
+      hovertemplate: '<b>' + c.label + '</b><br>%{x}: %{y:.1f}%<extra></extra>',
+    };
+  });
+
+  /* Annotation y-values: Corrosion is at BOTTOM (from 0 to corr%), Equipment at TOP */
+  var compAnnot = [
+    /* "Corrosion" label inside crimson band at 2003 */
+    {x:2003, y:pct(corr,1)/2, xref:'x', yref:'y',
+     text:'<b style="font-size:10px">Corrosion</b>',
+     showarrow:false, xanchor:'center', yanchor:'middle', font:{color:'#fff',size:10,family:F}},
+    /* "28% in 2024" inside corrosion band at 2024 */
+    {x:2024, y:pct(corr,22)/2, xref:'x', yref:'y',
+     text:'<b style="font-size:10px">28%<br>2024</b>',
+     showarrow:false, xanchor:'right', yanchor:'middle', xshift:-4,
+     font:{color:'#fff',size:10,family:F}},
+    /* Equipment failure label at top */
+    {x:2005, y:100-pct(equip,3)/2, xref:'x', yref:'y',
+     text:'<span style="font-size:9px">Equipment<br>failure</span>',
+     showarrow:false, xanchor:'center', yanchor:'middle',
+     font:{color:'#555',size:9,family:'system-ui'}},
+  ];
+
+  var compLayout = {
+    paper_bgcolor:'transparent', plot_bgcolor:'transparent',
+    barmode:'stack',
+    margin:{t:4,r:24,b:44,l:56}, height:176,
+    xaxis:{tickmode:'linear',dtick:2,range:[2001.5,2025],gridcolor:'#ece8e2',
+           tickcolor:'transparent',tickfont:{family:'system-ui',size:10,color:'#888'},zeroline:false},
+    yaxis:{range:[0,100],ticksuffix:'%',tickfont:{family:'system-ui',size:10,color:'#888'},
+           tickcolor:'transparent',gridcolor:'#ece8e2',zeroline:false,
+           title:{text:'Cause share',font:{size:10,color:'#888',family:'system-ui'},standoff:6}},
+    showlegend:false, font:{family:F},
+    annotations: compAnnot,
+    shapes:[
+      {type:'line',x0:2010,x1:2010,y0:0,y1:100,line:{color:'rgba(155,28,28,0.3)',width:1,dash:'dot'}},
+      {type:'line',x0:2015,x1:2015,y0:0,y1:100,line:{color:'rgba(100,100,100,0.2)',width:1,dash:'dot'}},
+    ],
+  };
+
+  Plotly.newPlot('chart-inc-comp', compTraces, compLayout, {responsive:true,displayModeBar:false});
+}());
+</script>
+
+
+<!-- ═══════════════════════════════════════════════ SECTION 7 · OPERATORS -->
+<section class="s-prose">
+  <div class="col">
+    <h2 class="s-hed">Named in the Record</h2>
+    <p class="body-copy">The federal records identify each operator by name. They record the barrels released and the barrels recovered, and the distance between those figures varies widely across the industry. A small number of companies account for a disproportionate share of the volume spilled since 2010, and several of them operate systems where a significant portion of active mileage belongs to the network&#8217;s oldest decades.</p>
+  </div>
+</section>
+
+<div class="s-chart">
+  <div class="wide">
+    <p class="chart-hed">Fifteen Operators Account for More Than Half the Unrecovered Volume Spilled Since 2010</p>
+    <p class="chart-dek">Gross barrels released vs. recovered, 2010&#8211;2024 &nbsp;&#183;&nbsp; Open dot = recovered &nbsp;&bull;&nbsp; Filled dot = gross released &nbsp;&#183;&nbsp; Color = recovery rate &nbsp;&#183;&nbsp; Hover for incident detail</p>
+    <div class="chart-ops-wrap"><div id="chart-ops"></div></div>
+    <p class="chart-src">Source: PHMSA Hazardous Liquid Accident Database (2010&#8211;present), complete years 2010&#8211;2024. Volumes in barrels (42 gal). &#8224; Enterprise Products Partners combines Enterprise Products Operating LLC and Enterprise Crude Pipeline LLC. &#8224; Chevron Pipelines combines Chevron Pipe Line Co and Chevron Midstream Pipelines LLC. TC Oil Pipeline Operations (25,372 bbls, anomalous 100% recovery) excluded. Color: crimson = below 35% recovered; green = above 70% recovered; gray = intermediate.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var F = "Georgia, 'Times New Roman', serif";
+
+  /* Sorted descending by gross released; reversed below so largest appears at TOP */
+  var ops = [
+    {nm:'Enterprise Products Partners\u2020', rel:236416, rec:52157, net:184258, cnt:709, wbbl:30565, wyr:2015, wst:'WV'},
+    {nm:'Colonial Pipeline Co',              rel:68236,  rec:42267, net:25969,  cnt:238, wbbl:47619, wyr:2020, wst:'NC'},
+    {nm:'Energy Transfer Company',           rel:65087,  rec:2836,  net:62251,  cnt:68,  wbbl:38793, wyr:2024, wst:'TX'},
+    {nm:'Chevron Pipelines\u2020',           rel:58487,  rec:2419,  net:56067,  cnt:58,  wbbl:23702, wyr:2013, wst:'LA'},
+    {nm:'Denbury Gulf Coast',                rel:53854,  rec:0,     net:53854,  cnt:8,   wbbl:41177, wyr:2020, wst:'MS'},
+    {nm:'DCP Midstream',                     rel:53011,  rec:5,     net:53006,  cnt:56,  wbbl:48400, wyr:2018, wst:'TX'},
+    {nm:'Enbridge Energy LP',                rel:39496,  rec:32857, net:6639,   cnt:121, wbbl:20082, wyr:2010, wst:'MI'},
+    {nm:'Sunoco Pipeline LP',                rel:28747,  rec:15383, net:13363,  cnt:270, wbbl:8600,  wyr:2016, wst:'TX'},
+    {nm:'Marathon Pipe Line LLC',            rel:28522,  rec:20668, net:7853,   cnt:156, wbbl:9000,  wyr:2011, wst:'MI'},
+    {nm:'Centurion Pipeline LP',             rel:28514,  rec:24102, net:4412,   cnt:62,  wbbl:10200, wyr:2010, wst:'TX'},
+    {nm:'Phillips 66 Pipeline LLC',          rel:27091,  rec:9650,  net:17441,  cnt:170, wbbl:13465, wyr:2017, wst:'LA'},
+    {nm:'Plains Pipeline LP',                rel:25979,  rec:22402, net:3577,   cnt:282, wbbl:2949,  wyr:2017, wst:'WY'},
+    {nm:'Tesoro High Plains',                rel:20838,  rec:6094,  net:14744,  cnt:14,  wbbl:20600, wyr:2013, wst:'ND'},
+    {nm:'Magellan Pipeline Co',              rel:20631,  rec:13777, net:6854,   cnt:259, wbbl:2184,  wyr:2011, wst:'NE'},
+    {nm:'ONEOK NGL Pipeline',                rel:19638,  rec:26,    net:19612,  cnt:39,  wbbl:13718, wyr:2010, wst:'OK'},
+  ];
+
+  /* Reverse so Enterprise appears at top of chart (Plotly categorical y-axis: bottom = index 0) */
+  var d = ops.slice().reverse();
+
+  /* Recovery-rate color: crimson < 35%, gray 35-70%, green > 70% */
+  function netColor(o) {
+    var r = o.rec / o.rel;
+    if (r >= 0.70) return '#166534';
+    if (r >= 0.35) return '#A09890';
+    return '#9B1C1C';
+  }
+  function lineAlpha(o) {
+    var c = netColor(o);
+    if (c === '#166534') return 'rgba(22,101,52,0.30)';
+    if (c === '#9B1C1C') return 'rgba(155,28,28,0.26)';
+    return 'rgba(160,152,144,0.28)';
+  }
+
+  var traces_ops = [];
+
+  /* Connecting lines */
+  d.forEach(function(o) {
+    traces_ops.push({
+      type:'scatter', mode:'lines',
+      x:[o.rec, o.rel], y:[o.nm, o.nm],
+      line:{color: lineAlpha(o), width:2.2},
+      showlegend:false, hoverinfo:'skip',
+    });
+  });
+
+  /* Recovered open circles */
+  traces_ops.push({
+    type:'scatter', mode:'markers',
+    x: d.map(function(o){return o.rec;}),
+    y: d.map(function(o){return o.nm;}),
+    name:'Recovered',
+    marker:{symbol:'circle-open', color: d.map(function(o){return netColor(o);}),
+            size:9, line:{width:2.2}},
+    hovertemplate:'<b>%{y}</b><br>Recovered: %{x:,.0f} bbls<extra></extra>',
+  });
+
+  /* Gross released filled circles -- colored by recovery rate, not uniform crimson */
+  traces_ops.push({
+    type:'scatter', mode:'markers',
+    x: d.map(function(o){return o.rel;}),
+    y: d.map(function(o){return o.nm;}),
+    name:'Gross released',
+    marker:{
+      symbol:'circle',
+      color: d.map(function(o){return netColor(o);}),
+      size:11,
+      line:{color:'white',width:1.5}
+    },
+    customdata: d.map(function(o){
+      return [o.cnt, o.wbbl.toLocaleString(), o.wyr, o.wst,
+              o.rec.toLocaleString(), o.net.toLocaleString(),
+              Math.round(o.rec/o.rel*100)];
+    }),
+    hovertemplate:(
+      '<b>%{y}</b><br>' +
+      'Gross released: %{x:,.0f} bbls<br>' +
+      'Recovered: %{customdata[4]} bbls (%{customdata[6]}%)<br>' +
+      'Net unrecovered: %{customdata[5]} bbls<br>' +
+      'Incidents 2010\u20132024: %{customdata[0]}<br>' +
+      'Largest single incident: %{customdata[1]} bbls (%{customdata[2]}, %{customdata[3]})<extra></extra>'
+    ),
+  });
+
+  /* Net unrecovered labels to right of gross dot */
+  var netAnnot = d.map(function(o) {
+    return {
+      x: o.rel, y: o.nm,
+      xref:'x', yref:'y',
+      text: '\u2212' + o.net.toLocaleString() + ' net',
+      showarrow: false,
+      xanchor: 'left', xshift: 10,
+      yanchor: 'middle',
+      font: {size:9.5, color:netColor(o), family:'system-ui'},
+    };
+  });
+
+  /* Enterprise outlier callout */
+  netAnnot.push({
+    x: d[d.length-1].rel * 0.75, y: d[d.length-1].nm,
+    xref:'x', yref:'y',
+    text: '3.5\u00d7 the next-largest',
+    showarrow:false, xanchor:'center', yanchor:'top', yshift:-14,
+    font:{size:8.5, color:'#9B1C1C', family:'system-ui', style:'italic'},
+  });
+
+  var layout_ops = {
+    paper_bgcolor:'#FFFFFF', plot_bgcolor:'#FFFFFF',
+    margin:{t:12, r:120, b:52, l:175}, height:540,
+    xaxis:{
+      tickformat:',d', ticksuffix:' bbls',
+      range:[0, 265000],
+      gridcolor:'#ece8e2', tickcolor:'transparent',
+      tickfont:{family:'system-ui',size:10,color:'#888'},
+      zeroline:true, zerolinecolor:'#ddd', zerolinewidth:1,
+      title:{text:'Barrels (2010\u20132024 cumulative)', font:{size:10,color:'#888',family:'system-ui'},standoff:10},
+    },
+    yaxis:{
+      tickfont:{family:'system-ui',size:10,color:'#333'},
+      gridcolor:'#ece8e2', tickcolor:'transparent', zeroline:false,
+      automargin:true,
+    },
+    legend:{orientation:'h',x:0.5,y:-0.12,xanchor:'center',font:{size:11,family:F},itemsizing:'constant'},
+    annotations: netAnnot,
+    font:{family:F},
+  };
+
+  Plotly.newPlot('chart-ops', traces_ops, layout_ops, {responsive:true, displayModeBar:false});
+}());
+</script>
+
+
+<!-- ═══════════════════════════════════════════════ CLOSING PROSE -->
+<section class="s-prose s-closing">
+  <div class="col">
+    <p class="closing-copy">The record of this infrastructure is public. Every operator, every rupture, every barrel released and every barrel recovered is filed with the federal government and available to anyone willing to look. The pipelines will keep working, mostly, the way aging infrastructure always does: silently, until the day one of them does not. What the record asks is only that someone read it.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════ FOOTER · DATA & METHODS -->
 <section class="s-footer">
   <div class="col">
-    <p class="part2-label">Coming next &nbsp;&#8212;&nbsp; Part 2</p>
-    <h2 class="coming-next">The Files</h2>
-    <p class="teaser-text">Aging pipe fails in documented, recurring ways. Since 2010, operators have reported more than 5,900 incidents to federal regulators: ruptures, leaks, and releases into fields and waterways. The federal records identify each operator by name. They record the barrels released and the barrels recovered, and the gap between those figures is concentrated among a small number of companies. Part 2 opens the files.</p>
-
-    <div class="methods-block">
-      <h3>Data &amp; Methods</h3>
-      <p><b>Annual report data:</b> PHMSA Form 7000-1.1, Hazardous Liquid Annual Report, Parts A&#8211;E and I (2017&#8211;2024). Available at phmsa.dot.gov. Mileage totals and installation-decade breakdowns aggregated nationally across all operators and states. Rows with unknown installation decade excluded from age analyses (approx. 1.6% of total in 2024).</p>
-      <p><b>Mileage summary:</b> PHMSA Hazardous Liquid Annual Statistics (haz_liquid_annual_stat.xls, 2004&#8211;2024). Used for commodity-level mileage trends.</p>
-      <p><b>Incident data:</b> PHMSA Hazardous Liquid Accident Database (tab-delimited, 2010&#8211;present and 2002&#8211;2009). Used in Part 2.</p>
-      <p><b>Note:</b> This analysis covers hazardous liquid pipelines only (crude oil, refined petroleum products, highly volatile liquids, CO&#x2082;, and ethanol). Natural gas pipelines are a separate PHMSA reporting system and are not included.</p>
+    <div class="methods-block" style="margin-top:0;border-top:none;">
+      <details>
+        <summary class="methods-toggle">How we reported this</summary>
+        <div class="methods-content">
+          <p><b>Annual report data:</b> PHMSA Form 7000-1.1, Hazardous Liquid Annual Report, Parts A&#8211;E and I (2017&#8211;2024). Available at phmsa.dot.gov. Mileage totals and installation-decade breakdowns aggregated nationally across all operators and states. Rows with unknown installation decade excluded from age analyses (approx. 1.6% of total in 2024).</p>
+          <p><b>Mileage summary:</b> PHMSA Hazardous Liquid Annual Statistics (haz_liquid_annual_stat.xls, 2004&#8211;2024). Used for commodity-level mileage trends.</p>
+          <p><b>Incident data:</b> PHMSA Hazardous Liquid Accident Database (tab-delimited files covering 2002&#8211;2009 and 2010&#8211;present). Complete years 2002&#8211;2024 only (8,590 incidents; 5,560 from 2010&#8211;2024). Cause categories in the 2002&#8211;2009 file normalized to match the 2010&#8211;present schema. Release volumes reported in gallons in the older file converted to barrels (42 gal/bbl). Operator rankings use unintentional release barrels as reported; two multi-entity operators (Enterprise Products Partners, Chevron Pipelines) combined from separately filed subsidiaries.</p>
+          <p><b>Note:</b> This analysis covers hazardous liquid pipelines only (crude oil, refined petroleum products, highly volatile liquids, CO&#x2082;, and ethanol). Natural gas pipelines are a separate PHMSA reporting system and are not included.</p>
+        </div>
+      </details>
     </div>
   </div>
 </section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SCROLLAMA STARTER
+     ═══════════════════════════════════════════════════════════════════════
+     Scrollama (https://github.com/russellgoldenberg/scrollama) is loaded
+     in the <head>. To activate scroll-driven chart highlighting on the
+     operator chart, wire it up like this:
+
+     <div class="scroll-container">
+       <div class="scroll-graphic">  <!-- sticky chart panel -->
+         <div id="chart-ops-scroll"></div>
+       </div>
+       <div class="scroll-steps">
+         <div class="step" data-op="Enterprise Products Partners†">
+           <p>Enterprise Products Partners released 236,416 barrels over 14 years...</p>
+         </div>
+         <div class="step" data-op="Energy Transfer Company">
+           <p>Energy Transfer recovered fewer than 5% of what it spilled...</p>
+         </div>
+         ... one <div class="step"> per operator ...
+       </div>
+     </div>
+
+     <script>
+     var scroller = scrollama();
+     scroller.setup({ step: '.step', offset: 0.5, progress: false })
+       .onStepEnter(function(response) {
+         var opName = response.element.dataset.op;
+         // Restyle: gray all, highlight current operator
+         Plotly.restyle('chart-ops-scroll',
+           {'marker.color': [[...allGray...]]},  // reset all to gray
+           [1, 2]  // trace indices for open + filled circles
+         );
+         Plotly.restyle('chart-ops-scroll',
+           {'marker.color': crimsonForOp(opName)},  // highlight one
+           [1, 2]
+         );
+       });
+     </script>
+
+     See scrollama docs for full sticky-positioning CSS pattern.
+═══════════════════════════════════════════════════════════════════════ -->
 
 
 </body>
