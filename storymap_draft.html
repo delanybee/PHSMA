@@ -243,11 +243,7 @@ figcaption {
   line-height: 1.45;
 }
 @media (max-width: 560px) {
-  figure.fig-inline {
-    float: none;
-    width: 100%;
-    margin: 16px 0;
-  }
+  #chart-3c { height: 420px; }
 }
 
 /* ── Operator chart mobile scroll ────────────── */
@@ -310,10 +306,7 @@ details[open] .methods-toggle::before { content: '\2212  '; color: #9B1C1C; }
 
 
 <!-- ════ PHOTO (a) · Full-width, between cold open and Section 2 ══════════ -->
-<figure class="fig-full">
-  <img src="images/photo-01.jpg" alt="" loading="lazy">
-  <div class="col"><figcaption>CAPTION + CREDIT TBD</figcaption></div>
-</figure>
+<figure class="fig-full" role="presentation"></figure>
 
 
 <!-- ═══════════════════════════════════════════════ SECTION 2 · GROWTH -->
@@ -321,11 +314,6 @@ details[open] .methods-toggle::before { content: '\2212  '; color: #9B1C1C; }
   <div class="col">
     <h2 class="s-hed">The Boom Nobody Watched</h2>
     <p class="body-copy">Between 2004 and 2019, the shale revolution drove the largest oil infrastructure expansion in American history, adding 34,000 miles of crude pipeline in a single decade. The expansion drew little public attention. The controversies that did surface, Keystone XL and Dakota Access among them, concerned individual lines while the network itself grew by thousands of miles each year.</p>
-    <!-- PHOTO (b) · Floated beside Kalamazoo paragraph -->
-    <figure class="fig-inline">
-      <img src="images/photo-02.jpg" alt="" loading="lazy">
-      <figcaption>CAPTION + CREDIT TBD</figcaption>
-    </figure>
     <p class="body-copy">In July 2010, midway through the boom, a ruptured pipeline released more than 840,000 gallons of crude into Michigan&#8217;s Kalamazoo River, the largest inland oil spill in United States history. Cleanup costs exceeded one billion dollars. The pipe had been installed in 1969. That year matters to everything that follows.</p>
   </div>
 </section>
@@ -418,16 +406,6 @@ details[open] .methods-toggle::before { content: '\2212  '; color: #9B1C1C; }
 }());
 </script>
 
-
-<!-- ════ PHOTO (c) · Column-width, between growth chart and Section 3 ════ -->
-<section class="s-prose" style="padding-top:40px;padding-bottom:0">
-  <div class="col">
-    <figure class="fig-col">
-      <img src="images/photo-03.jpg" alt="" loading="lazy">
-      <figcaption>CAPTION + CREDIT TBD</figcaption>
-    </figure>
-  </div>
-</section>
 
 
 <!-- ═══════════════════════════════════════════════ SECTION 3 · PRE-EPA -->
