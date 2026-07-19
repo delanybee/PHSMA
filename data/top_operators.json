@@ -1,0 +1,152 @@
+[
+  {
+    "name": "ENTERPRISE PRODUCTS OPERATING LLC",
+    "released": 173181.0,
+    "recovered": 2110.0,
+    "net": 171070.0,
+    "count": 327,
+    "worst_bbls": 30565.0,
+    "worst_year": 2015,
+    "worst_state": "WV"
+  },
+  {
+    "name": "COLONIAL PIPELINE CO",
+    "released": 68236.0,
+    "recovered": 42267.0,
+    "net": 25969.0,
+    "count": 238,
+    "worst_bbls": 47619.0,
+    "worst_year": 2020,
+    "worst_state": "NC"
+  },
+  {
+    "name": "ENERGY TRANSFER COMPANY",
+    "released": 65087.0,
+    "recovered": 2836.0,
+    "net": 62251.0,
+    "count": 68,
+    "worst_bbls": 38793.0,
+    "worst_year": 2024,
+    "worst_state": "TX"
+  },
+  {
+    "name": "ENTERPRISE CRUDE PIPELINE LLC",
+    "released": 63235.0,
+    "recovered": 50047.0,
+    "net": 13188.0,
+    "count": 382,
+    "worst_bbls": 12229.0,
+    "worst_year": 2011,
+    "worst_state": "TX"
+  },
+  {
+    "name": "DENBURY GULF COAST PIPELINES, LLC",
+    "released": 53854.0,
+    "recovered": 0.0,
+    "net": 53854.0,
+    "count": 8,
+    "worst_bbls": 41177.0,
+    "worst_year": 2020,
+    "worst_state": "MS"
+  },
+  {
+    "name": "DCP MIDSTREAM",
+    "released": 53011.0,
+    "recovered": 5.0,
+    "net": 53006.0,
+    "count": 56,
+    "worst_bbls": 48400.0,
+    "worst_year": 2018,
+    "worst_state": "TX"
+  },
+  {
+    "name": "ENBRIDGE ENERGY, LIMITED PARTNERSHIP",
+    "released": 39496.0,
+    "recovered": 32857.0,
+    "net": 6639.0,
+    "count": 121,
+    "worst_bbls": 20082.0,
+    "worst_year": 2010,
+    "worst_state": "MI"
+  },
+  {
+    "name": "CHEVRON PIPE LINE CO",
+    "released": 34778.0,
+    "recovered": 2419.0,
+    "net": 32358.0,
+    "count": 54,
+    "worst_bbls": 12836.0,
+    "worst_year": 2011,
+    "worst_state": "TX"
+  },
+  {
+    "name": "SUNOCO PIPELINE L.P.",
+    "released": 28747.0,
+    "recovered": 15383.0,
+    "net": 13363.0,
+    "count": 270,
+    "worst_bbls": 8600.0,
+    "worst_year": 2016,
+    "worst_state": "TX"
+  },
+  {
+    "name": "MARATHON PIPE LINE LLC",
+    "released": 28522.0,
+    "recovered": 20668.0,
+    "net": 7853.0,
+    "count": 156,
+    "worst_bbls": 9000.0,
+    "worst_year": 2011,
+    "worst_state": "MI"
+  },
+  {
+    "name": "CENTURION PIPELINE L.P.",
+    "released": 28514.0,
+    "recovered": 24102.0,
+    "net": 4412.0,
+    "count": 62,
+    "worst_bbls": 10200.0,
+    "worst_year": 2010,
+    "worst_state": "TX"
+  },
+  {
+    "name": "PHILLIPS 66 PIPELINE LLC",
+    "released": 27091.0,
+    "recovered": 9650.0,
+    "net": 17441.0,
+    "count": 170,
+    "worst_bbls": 13465.0,
+    "worst_year": 2017,
+    "worst_state": "LA"
+  },
+  {
+    "name": "PLAINS PIPELINE, L.P.",
+    "released": 25979.0,
+    "recovered": 22402.0,
+    "net": 3577.0,
+    "count": 282,
+    "worst_bbls": 2949.0,
+    "worst_year": 2017,
+    "worst_state": "WY"
+  },
+  {
+    "name": "TC OIL PIPELINE OPERATIONS INC",
+    "released": 25372.0,
+    "recovered": 25372.0,
+    "net": 0.0,
+    "count": 28,
+    "worst_bbls": 12937.0,
+    "worst_year": 2022,
+    "worst_state": "KS"
+  },
+  {
+    "name": "CHEVRON MIDSTREAM PIPELINES LLC",
+    "released": 23709.0,
+    "recovered": 0.0,
+    "net": 23709.0,
+    "count": 4,
+    "worst_bbls": 23702.0,
+    "worst_year": 2013,
+    "worst_state": "LA"
+  }
+]

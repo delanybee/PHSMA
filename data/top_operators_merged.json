@@ -1,0 +1,214 @@
+[
+  {
+    "name": "Enterprise Products Partners",
+    "released": 236416,
+    "recovered": 52157,
+    "net": 184258,
+    "count": 709,
+    "worst_bbls": 30565,
+    "worst_year": 2015,
+    "worst_state": "WV",
+    "pre_epa_pct": 11.1,
+    "sources": [
+      "ENTERPRISE CRUDE PIPELINE LLC",
+      "ENTERPRISE PRODUCTS OPERATING LLC"
+    ]
+  },
+  {
+    "name": "COLONIAL PIPELINE CO",
+    "released": 68236,
+    "recovered": 42267,
+    "net": 25969,
+    "count": 238,
+    "worst_bbls": 47619,
+    "worst_year": 2020,
+    "worst_state": "NC",
+    "pre_epa_pct": 49.2,
+    "sources": [
+      "COLONIAL PIPELINE CO"
+    ]
+  },
+  {
+    "name": "ENERGY TRANSFER COMPANY",
+    "released": 65087,
+    "recovered": 2836,
+    "net": 62251,
+    "count": 68,
+    "worst_bbls": 38793,
+    "worst_year": 2024,
+    "worst_state": "TX",
+    "pre_epa_pct": 38.3,
+    "sources": [
+      "ENERGY TRANSFER COMPANY"
+    ]
+  },
+  {
+    "name": "Chevron Pipelines",
+    "released": 58487,
+    "recovered": 2419,
+    "net": 56067,
+    "count": 58,
+    "worst_bbls": 23702,
+    "worst_year": 2013,
+    "worst_state": "LA",
+    "pre_epa_pct": 33.2,
+    "sources": [
+      "CHEVRON PIPE LINE CO",
+      "CHEVRON MIDSTREAM PIPELINES LLC"
+    ]
+  },
+  {
+    "name": "DENBURY GULF COAST PIPELINES, LLC",
+    "released": 53854,
+    "recovered": 0,
+    "net": 53854,
+    "count": 8,
+    "worst_bbls": 41177,
+    "worst_year": 2020,
+    "worst_state": "MS",
+    "pre_epa_pct": 13.2,
+    "sources": [
+      "DENBURY GULF COAST PIPELINES, LLC"
+    ]
+  },
+  {
+    "name": "DCP MIDSTREAM",
+    "released": 53011,
+    "recovered": 5,
+    "net": 53006,
+    "count": 56,
+    "worst_bbls": 48400,
+    "worst_year": 2018,
+    "worst_state": "TX",
+    "pre_epa_pct": null,
+    "sources": [
+      "DCP MIDSTREAM"
+    ]
+  },
+  {
+    "name": "ENBRIDGE ENERGY, LIMITED PARTNERSHIP",
+    "released": 39496,
+    "recovered": 32857,
+    "net": 6639,
+    "count": 121,
+    "worst_bbls": 20082,
+    "worst_year": 2010,
+    "worst_state": "MI",
+    "pre_epa_pct": 39.8,
+    "sources": [
+      "ENBRIDGE ENERGY, LIMITED PARTNERSHIP"
+    ]
+  },
+  {
+    "name": "SUNOCO PIPELINE L.P.",
+    "released": 28747,
+    "recovered": 15383,
+    "net": 13363,
+    "count": 270,
+    "worst_bbls": 8600,
+    "worst_year": 2016,
+    "worst_state": "TX",
+    "pre_epa_pct": 64.7,
+    "sources": [
+      "SUNOCO PIPELINE L.P."
+    ]
+  },
+  {
+    "name": "MARATHON PIPE LINE LLC",
+    "released": 28522,
+    "recovered": 20668,
+    "net": 7853,
+    "count": 156,
+    "worst_bbls": 9000,
+    "worst_year": 2011,
+    "worst_state": "MI",
+    "pre_epa_pct": 74.0,
+    "sources": [
+      "MARATHON PIPE LINE LLC"
+    ]
+  },
+  {
+    "name": "CENTURION PIPELINE L.P.",
+    "released": 28514,
+    "recovered": 24102,
+    "net": 4412,
+    "count": 62,
+    "worst_bbls": 10200,
+    "worst_year": 2010,
+    "worst_state": "TX",
+    "pre_epa_pct": 69.6,
+    "sources": [
+      "CENTURION PIPELINE L.P."
+    ]
+  },
+  {
+    "name": "PHILLIPS 66 PIPELINE LLC",
+    "released": 27091,
+    "recovered": 9650,
+    "net": 17441,
+    "count": 170,
+    "worst_bbls": 13465,
+    "worst_year": 2017,
+    "worst_state": "LA",
+    "pre_epa_pct": 52.6,
+    "sources": [
+      "PHILLIPS 66 PIPELINE LLC"
+    ]
+  },
+  {
+    "name": "PLAINS PIPELINE, L.P.",
+    "released": 25979,
+    "recovered": 22402,
+    "net": 3577,
+    "count": 282,
+    "worst_bbls": 2949,
+    "worst_year": 2017,
+    "worst_state": "WY",
+    "pre_epa_pct": 34.8,
+    "sources": [
+      "PLAINS PIPELINE, L.P."
+    ]
+  },
+  {
+    "name": "TESORO HIGH PLAINS PIPELINE COMPANY LLC",
+    "released": 20838,
+    "recovered": 6094,
+    "net": 14744,
+    "count": 14,
+    "worst_bbls": 20600,
+    "worst_year": 2013,
+    "worst_state": "ND",
+    "pre_epa_pct": 95.5,
+    "sources": [
+      "TESORO HIGH PLAINS PIPELINE COMPANY LLC"
+    ]
+  },
+  {
+    "name": "MAGELLAN PIPELINE COMPANY, LP",
+    "released": 20631,
+    "recovered": 13777,
+    "net": 6854,
+    "count": 259,
+    "worst_bbls": 2184,
+    "worst_year": 2011,
+    "worst_state": "NE",
+    "pre_epa_pct": 65.8,
+    "sources": [
+      "MAGELLAN PIPELINE COMPANY, LP"
+    ]
+  },
+  {
+    "name": "ONEOK NGL PIPELINE LP",
+    "released": 19638,
+    "recovered": 26,
+    "net": 19612,
+    "count": 39,
+    "worst_bbls": 13718,
+    "worst_year": 2010,
+    "worst_state": "OK",
+    "pre_epa_pct": 65.8,
+    "sources": [
+      "ONEOK NGL PIPELINE LP"
+    ]
+  }
+]

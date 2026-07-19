@@ -1,0 +1,301 @@
+[
+  {
+    "year": 2002,
+    "total": 448,
+    "causes": {
+      "Corrosion": 96,
+      "Equipment failure": 176,
+      "Incorrect operation": 46,
+      "Material/weld failure": 47,
+      "Excavation damage": 32,
+      "Natural forces": 13,
+      "Outside force / other": 38
+    }
+  },
+  {
+    "year": 2003,
+    "total": 432,
+    "causes": {
+      "Corrosion": 95,
+      "Equipment failure": 152,
+      "Incorrect operation": 47,
+      "Material/weld failure": 54,
+      "Excavation damage": 27,
+      "Natural forces": 18,
+      "Outside force / other": 39
+    }
+  },
+  {
+    "year": 2004,
+    "total": 377,
+    "causes": {
+      "Corrosion": 90,
+      "Equipment failure": 131,
+      "Incorrect operation": 26,
+      "Material/weld failure": 41,
+      "Excavation damage": 27,
+      "Natural forces": 24,
+      "Outside force / other": 38
+    }
+  },
+  {
+    "year": 2005,
+    "total": 369,
+    "causes": {
+      "Corrosion": 81,
+      "Equipment failure": 114,
+      "Incorrect operation": 34,
+      "Material/weld failure": 54,
+      "Excavation damage": 19,
+      "Natural forces": 37,
+      "Outside force / other": 30
+    }
+  },
+  {
+    "year": 2006,
+    "total": 354,
+    "causes": {
+      "Corrosion": 91,
+      "Equipment failure": 118,
+      "Incorrect operation": 46,
+      "Material/weld failure": 31,
+      "Excavation damage": 18,
+      "Natural forces": 14,
+      "Outside force / other": 36
+    }
+  },
+  {
+    "year": 2007,
+    "total": 332,
+    "causes": {
+      "Corrosion": 81,
+      "Equipment failure": 103,
+      "Incorrect operation": 36,
+      "Material/weld failure": 48,
+      "Excavation damage": 21,
+      "Natural forces": 17,
+      "Outside force / other": 26
+    }
+  },
+  {
+    "year": 2008,
+    "total": 376,
+    "causes": {
+      "Corrosion": 81,
+      "Equipment failure": 119,
+      "Incorrect operation": 46,
+      "Material/weld failure": 63,
+      "Excavation damage": 21,
+      "Natural forces": 23,
+      "Outside force / other": 23
+    }
+  },
+  {
+    "year": 2009,
+    "total": 342,
+    "causes": {
+      "Corrosion": 77,
+      "Equipment failure": 128,
+      "Incorrect operation": 41,
+      "Material/weld failure": 44,
+      "Excavation damage": 18,
+      "Natural forces": 16,
+      "Outside force / other": 18
+    }
+  },
+  {
+    "year": 2010,
+    "total": 350,
+    "causes": {
+      "Corrosion": 71,
+      "Equipment failure": 153,
+      "Incorrect operation": 36,
+      "Material/weld failure": 35,
+      "Excavation damage": 16,
+      "Natural forces": 19,
+      "Outside force / other": 20
+    }
+  },
+  {
+    "year": 2011,
+    "total": 344,
+    "causes": {
+      "Corrosion": 79,
+      "Equipment failure": 154,
+      "Incorrect operation": 36,
+      "Material/weld failure": 24,
+      "Excavation damage": 20,
+      "Natural forces": 11,
+      "Outside force / other": 20
+    }
+  },
+  {
+    "year": 2012,
+    "total": 367,
+    "causes": {
+      "Corrosion": 100,
+      "Equipment failure": 144,
+      "Incorrect operation": 55,
+      "Material/weld failure": 25,
+      "Excavation damage": 11,
+      "Natural forces": 15,
+      "Outside force / other": 17
+    }
+  },
+  {
+    "year": 2013,
+    "total": 400,
+    "causes": {
+      "Corrosion": 74,
+      "Equipment failure": 174,
+      "Incorrect operation": 69,
+      "Material/weld failure": 35,
+      "Excavation damage": 14,
+      "Natural forces": 14,
+      "Outside force / other": 20
+    }
+  },
+  {
+    "year": 2014,
+    "total": 455,
+    "causes": {
+      "Corrosion": 88,
+      "Equipment failure": 218,
+      "Incorrect operation": 72,
+      "Material/weld failure": 24,
+      "Excavation damage": 13,
+      "Natural forces": 22,
+      "Outside force / other": 18
+    }
+  },
+  {
+    "year": 2015,
+    "total": 460,
+    "causes": {
+      "Corrosion": 103,
+      "Equipment failure": 209,
+      "Incorrect operation": 59,
+      "Material/weld failure": 29,
+      "Excavation damage": 17,
+      "Natural forces": 22,
+      "Outside force / other": 21
+    }
+  },
+  {
+    "year": 2016,
+    "total": 420,
+    "causes": {
+      "Corrosion": 90,
+      "Equipment failure": 187,
+      "Incorrect operation": 65,
+      "Material/weld failure": 33,
+      "Excavation damage": 8,
+      "Natural forces": 17,
+      "Outside force / other": 20
+    }
+  },
+  {
+    "year": 2017,
+    "total": 415,
+    "causes": {
+      "Corrosion": 76,
+      "Equipment failure": 185,
+      "Incorrect operation": 69,
+      "Material/weld failure": 31,
+      "Excavation damage": 18,
+      "Natural forces": 26,
+      "Outside force / other": 10
+    }
+  },
+  {
+    "year": 2018,
+    "total": 405,
+    "causes": {
+      "Corrosion": 56,
+      "Equipment failure": 221,
+      "Incorrect operation": 58,
+      "Material/weld failure": 24,
+      "Excavation damage": 20,
+      "Natural forces": 14,
+      "Outside force / other": 12
+    }
+  },
+  {
+    "year": 2019,
+    "total": 384,
+    "causes": {
+      "Corrosion": 71,
+      "Equipment failure": 185,
+      "Incorrect operation": 76,
+      "Material/weld failure": 16,
+      "Excavation damage": 10,
+      "Natural forces": 17,
+      "Outside force / other": 9
+    }
+  },
+  {
+    "year": 2020,
+    "total": 332,
+    "causes": {
+      "Corrosion": 65,
+      "Equipment failure": 164,
+      "Incorrect operation": 49,
+      "Material/weld failure": 22,
+      "Excavation damage": 12,
+      "Natural forces": 10,
+      "Outside force / other": 10
+    }
+  },
+  {
+    "year": 2021,
+    "total": 347,
+    "causes": {
+      "Corrosion": 97,
+      "Equipment failure": 147,
+      "Incorrect operation": 38,
+      "Material/weld failure": 19,
+      "Excavation damage": 7,
+      "Natural forces": 30,
+      "Outside force / other": 9
+    }
+  },
+  {
+    "year": 2022,
+    "total": 295,
+    "causes": {
+      "Corrosion": 66,
+      "Equipment failure": 131,
+      "Incorrect operation": 46,
+      "Material/weld failure": 22,
+      "Excavation damage": 4,
+      "Natural forces": 16,
+      "Outside force / other": 10
+    }
+  },
+  {
+    "year": 2023,
+    "total": 299,
+    "causes": {
+      "Corrosion": 88,
+      "Equipment failure": 134,
+      "Incorrect operation": 36,
+      "Material/weld failure": 19,
+      "Excavation damage": 10,
+      "Natural forces": 3,
+      "Outside force / other": 9
+    }
+  },
+  {
+    "year": 2024,
+    "total": 287,
+    "causes": {
+      "Corrosion": 80,
+      "Equipment failure": 138,
+      "Incorrect operation": 28,
+      "Material/weld failure": 17,
+      "Excavation damage": 5,
+      "Natural forces": 8,
+      "Outside force / other": 11
+    }
+  }
+]
